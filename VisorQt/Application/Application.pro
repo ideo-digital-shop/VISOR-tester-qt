@@ -1,13 +1,19 @@
 TEMPLATE = app
 
-QT += qml quick
+TARGET = Application
+
+QT += core gui qml quick
 
 SOURCES += main.cpp
 
 RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
+#QML_IMPORT_PATH = $$PWD/QML
+
+#qml_folder.source = qml
+
+#DEPLOYMENTFOLDERS = qml_folder
 
 # Default rules for deployment.
 include(deployment.pri)
@@ -24,3 +30,9 @@ else:win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lemm
 else:win32:!win32-g++:CONFIG(release, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lemma-qt/LemmaLib/release/LemmaLib.lib
 else:win32:!win32-g++:CONFIG(debug, debug|release): PRE_TARGETDEPS += $$OUT_PWD/../lemma-qt/LemmaLib/debug/LemmaLib.lib
 else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lemma-qt/LemmaLib/libLemmaLib.a
+
+OTHER_FILES += \
+    qml/assets/mapData.json \
+    qml/assets/* \
+    qml/* \
+    loose/config.qml

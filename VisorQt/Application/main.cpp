@@ -14,10 +14,11 @@ int main(int argc, char *argv[])
         QQuickView view;
 
         //instantiate lemma with GuestName and desired RoomName (blank string for Free Guest).
-        Lemma * lemma = new Lemma(&view, "QtGuest", "");
+        Lemma * lemma = new Lemma(&view, "QtVisor", "EvanRoom");
         lemma->start();
 
         QUrl mainQml = QUrl(QStringLiteral("qrc:///main.qml"));
+//        QUrl mainQml = QUrl(QStringLiteral("main.qml"));
         view.setSource( mainQml );
 
         QObject::connect( (const QObject*) view.engine(), SIGNAL( quit() ), &app, SLOT( quit() ));

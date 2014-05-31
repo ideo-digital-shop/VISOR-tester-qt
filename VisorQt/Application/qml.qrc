@@ -1,5 +1,14 @@
 <RCC>
     <qresource prefix="/">
         <file>main.qml</file>
+        <file>assets/MapData.qml</file>
+        <file>assets/Segment.qml</file>
+        <file>assets/NetworkGraph.qml</file>
+        <file>assets/SectionFunctions.js</file>
+        <file>assets/Node.js</file>
+        <file>assets/RouteRenderer.qml</file>
+        <file>assets/RouteRendererFunctions.js</file>
+        <file>assets/Hero.qml</file>
+        <file>assets/NetworkPosition.qml</file>
     </qresource>
 </RCC>
