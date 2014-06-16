@@ -4,7 +4,8 @@ TARGET = Application
 
 QT += core gui qml quick
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    cursorshapearea.cpp
 
 RESOURCES += qml.qrc
 
@@ -34,5 +35,9 @@ else:unix: PRE_TARGETDEPS += $$OUT_PWD/../lemma-qt/LemmaLib/libLemmaLib.a
 OTHER_FILES += \
     qml/assets/mapData.json \
     qml/assets/* \
+    qml/assets/Moderator/* \
     qml/* \
     loose/config.qml
+
+HEADERS += \
+    cursorshapearea.h

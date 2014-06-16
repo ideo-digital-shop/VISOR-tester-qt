@@ -6,9 +6,26 @@
         <file>assets/NetworkGraph.qml</file>
         <file>assets/SectionFunctions.js</file>
         <file>assets/Node.js</file>
-        <file>assets/RouteRenderer.qml</file>
+        <file>assets/MapRenderer.qml</file>
         <file>assets/RouteRendererFunctions.js</file>
-        <file>assets/Hero.qml</file>
+        <file>assets/HeroModel.qml</file>
         <file>assets/NetworkPosition.qml</file>
+        <file>assets/HeroView.qml</file>
+        <file>assets/Moderator/Moderator.qml</file>
+        <file>assets/Moderator/Moderator_Elements/Slider.qml</file>
+        <file>assets/Moderator/Moderator_Elements/ValueSlider.qml</file>
+        <file>assets/Moderator/Moderator_Elements/Button.qml</file>
+        <file>assets/Moderator/Moderator_Elements/Checkbox.qml</file>
+        <file>assets/Moderator/Moderator_Elements/Expander.qml</file>
+        <file>assets/Moderator/Moderator_Elements/Label.qml</file>
+        <file>assets/Moderator/Moderator_Elements/Section.qml</file>
+        <file>assets/MapView.qml</file>
+        <file>assets/Moderator/Moderator_Elements/SelectorButton.qml</file>
+        <file>assets/Moderator/Moderator_Elements/SelectorCluster.qml</file>
+        <file>assets/SynchronizedVar.qml</file>
+        <file>assets/StateModel.qml</file>
+        <file>assets/MapData660.qml</file>
+        <file>assets/EventManager.qml</file>
+        <file>assets/SynchronizedSignal.qml</file>
     </qresource>
 </RCC>

@@ -36,12 +36,7 @@ Item {
     // the speed limit for this segment in kilometers per hour (56=35mph,120=75mph)
     property real speedLimit: 56
 
-    // a helper to indicate if travel is disabled in one of the directions
-    property bool isOneWay:!(forwardEnabled && reverseEnabled)
-
-    // indicates this segment is a highway segment which affects pathing node generation
-    property bool isHighway: false
-
+    property bool isTarget: false
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 
@@ -236,6 +231,33 @@ Item {
         }
 
         result.errorVector = errorVector;
+        result.segmentPosition = segmentPosition;
+
+        return result;
+    }
+
+    function evaluateVectorToSegment ( evalPosition , evalHeading ){
+        var result = new Object;
+        var segmentPosition = 0;
+        var testSection = segmentSections.get(0);
+        var testResult = SectionFunctions.evaluateVectorToSection( testSection, evalPosition , evalHeading );
+        var displacementMag;
+        var headingError;
+        var evalLengthPosition = 0;
+
+        for(var i=0; i<segmentSections.count; i++){
+            testSection = segmentSections.get(i);
+            testResult = SectionFunctions.evaluateVectorToSection( testSection, evalPosition , evalHeading );
+            if( testResult.displacementMag ){
+                if( !displacementMag || testResult.displacementMag < displacementMag ){
+                    displacementMag = testResult.displacementMag;
+                    segmentPosition = evalLengthPosition + testResult.sectionPosition;
+                }
+            }
+            evalLengthPosition += testSection.length;
+        }
+
+        result.displacementMag = displacementMag;
         result.segmentPosition = segmentPosition;
 
         return result;

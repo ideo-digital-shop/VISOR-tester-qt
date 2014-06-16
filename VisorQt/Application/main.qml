@@ -2,24 +2,33 @@
 
 /*
 TODO:
-Segment.heroEvaluation - returns {heroVector (vector from hero to closest point of segment), networkPosition (network position of closest point), coord (x,y coord of closest point)
-NetworkGraph.evaluateVector - use to find what the hero is pointing at, how far they are from it
-Serialize graph data - send out the entire graph over noam?
+• Serialize graph data - send out the entire graph over noam?
+• Draw grid in renderer
+• signal handler - connect to noam if config and connected, connect internal if not config
+• expose some shit to config file
+• build event handler (sends abstract events)
+• add speech, tone, vibe toggles
 */
 import QtQuick 2.2
 import QtQuick.Window 2.1
 import Lemma 1.0
+import MyTools 1.0
 import "assets"
+import "assets/Moderator"
 
 Rectangle {
+    id: root
     visible: true
-    width: 1680
-    height: 1050
+    width: parent ? parent.width : 0
+    height: parent ? parent.height : 0
     smooth: true
     antialiasing: true
+    color: "#444"
 
     property int clickCount: 0
     property bool noamIsConnected: false
+    property bool useNoamPosition: false
+
     property string recMessage: ""
 
     //Hear Noam message
@@ -30,15 +39,45 @@ Rectangle {
         }
     }
 
-    RouteRenderer{
-        id: routeRender
-        mapData: mapData
-        anchors.fill: parent
-        pixelsPerMeterScale: 20
+    StateModel{
+        id: rootStateModel
     }
 
-    MapData{
-        id: mapData
+    EventManager{
+        id: eventManager
+        mapData: mapView.mapData
+        evaluation: mapView.mapEvaluation
+    }
+
+    Moderator{
+        id:moderatorPanel
+        height: root.height
+        anchors.right: divider.horizontalCenter
+        anchors.left: parent ? parent.left : undefined
+    }
+
+    MapView{
+        id:mapView
+        anchors.left: moderatorPanel.right
+        anchors.top: parent ? parent.top : undefined
+        anchors.right: parent ? parent.right : undefined
+        height: parent.height
+    }
+
+    Rectangle{
+        id: divider
+        height: parent.height
+        width: 4
+        x: 200
+        color: "#7B7"
+        MouseArea{
+            anchors.fill: parent
+            cursorShape: Qt.SizeHorCursor
+            drag.target: divider
+            drag.axis: Drag.XAxis
+            drag.minimumX: 20
+            drag.maximumX: root.width-20
+        }
     }
 
     //Text display of received noam message
@@ -53,7 +92,9 @@ Rectangle {
             }
             else return qsTr("Looking for Noam Hosts...");
         }
-        anchors.centerIn: parent
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 20
     }
 
     //Track Noam connection status
@@ -72,9 +113,9 @@ Rectangle {
             noamLemma.speak( "heroOrientation" , sendOrient );
             sendOrient++;
             if( sendOrient > 360 ) sendOrient = 0;
-            var mapEvaluation = mapData.evaluatePointToGraph( routeRender.hero.heroPositionMeters );
-            sampleText.text = mapEvaluation.errorVector.magnitude.toFixed(1);
-            routeRender.closestPoint = mapData.getNetworkCoord( mapEvaluation.networkPosition );
+            //            var mapEvaluation = mapData.evaluatePointToGraph( mapRenderer.hero.heroPositionMeters );
+            //            sampleText.text = mapEvaluation.errorVector.magnitude.toFixed(1);
+            //            mapRenderer.closestPoint = mapData.getNetworkCoord( mapEvaluation.networkPosition );
         }
     }
 }
