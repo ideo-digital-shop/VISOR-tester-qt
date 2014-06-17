@@ -318,7 +318,7 @@ NetworkGraph {
 
         // Meeting Booth
         Segment{
-            segmentName: "Table"
+            segmentName: "PhoneBooth"
             segmentType: "Thing"
             isTarget: true
             segmentSections: ListModel{

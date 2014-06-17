@@ -77,18 +77,22 @@ Item {
         eventDataObj.feedbackMode = rootStateModel.feedbackMode.get();
         eventDataObj.object1 = buildFlashlightObject();
         eventDataObj.objectsLength = 1;
-        console.debug(JSON.stringify(eventDataObj));
-        if( eventDataObj.feedbackMode != "silent" ){
-            noamLemma.speak( "flashlightTrigger" , eventDataObj );
+        if( eventDataObj.feedbackMode != "silent"){
+            if(eventDataObj.object1.type != "None"){
+                console.debug(JSON.stringify(eventDataObj));
+                noamLemma.speak( "flashlightTrigger" , eventDataObj );
+            }
         }
         if( eventDataObj.feedbackMode == "silent" || rootStateModel.vibeMode.get() ){
-            leftMotor();
-            rightMotor();
+            if( eventDataObj.object1.magnitude<30*12 && eventDataObj.object1.magnitude>0){
+                var motorIntensityInt = (eventDataObj.object1.magnitude/(30*12))*4095;
+                rootStateModel.motorIntensity.set( parseInt(motorIntensityInt).toString());
+                leftMotor();
+                rightMotor();
+            }
         }
     }
-    function sendOverviewEvent(){
 
-    }
     function buildFlashlightObject(){
         var curElement = new Object;
         curElement.heading = 0;
@@ -112,10 +116,28 @@ Item {
         return curElement;
     }
 
+    function sendOverviewEvent(){
+        console.debug("sending overview")
+        var eventDataObj = new Object;
+        eventDataObj.soundMode = rootStateModel.soundMode.get();
+        eventDataObj.feedbackMode = rootStateModel.feedbackMode.get();
+        eventDataObj.object1 = buildOverviewObject();
+        eventDataObj.objectsLength = 1;
+        console.debug(JSON.stringify(eventDataObj));
+        if( eventDataObj.feedbackMode != "silent" ){
+            noamLemma.speak( "flashlightTrigger" , eventDataObj );
+        }
+        if( eventDataObj.feedbackMode == "silent" || rootStateModel.vibeMode.get() ){
+            leftMotor();
+            rightMotor();
+        }
+    }
+
     function buildOverviewObjectList(){
         var objectList = new Array;
         var curElement = new Object;
     }
+
     function nudgeLeft(){
         noamLemma.speak("nudgeLeft", true);
         if( rootStateModel.vibeMode.get() ) leftMotor();
@@ -163,9 +185,7 @@ Item {
             if( rootStateModel.flashlightScanMode.get() === "timer" && rootStateModel.flashlightIsScanning.get() ){
                 sendFlashlightEvent();
             }
-
         }
-
     }
 
     Timer{

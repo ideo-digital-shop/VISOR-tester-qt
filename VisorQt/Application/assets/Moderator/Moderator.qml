@@ -59,6 +59,18 @@ Rectangle{
                 }
             }
             Button{
+                id: sendOverviewButton
+                width: 120
+                height: 30
+                label: "Send Overview"
+                fillColor: "#0A2036"
+                textColor: "#DFDFDF"
+                animateClick: true
+                onClicked: {
+                    noamLemma.speak("wozOverview", true);
+                }
+            }
+            Button{
                 id: toggleFlashScanButton
                 x:8
                 width: 200
@@ -161,33 +173,34 @@ Rectangle{
                     active: (rootStateModel.flashlightScanMode.get() === "new")
                 }
             }
-            SelectorCluster{
-                id: useModeSelector
-                width: 320
-                height: 94
-                labelText: "Use Mode"
-                onSelectedSignal: {
-                    rootStateModel.useMode.set( selectionParameter );
-                }
-                SelectorButton{
-                    id: flashlight
-                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Flashlight"
-                    selectionParameter: "flashlight"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.useMode.get() === "flashlight")
-                }
-                SelectorButton{
-                    id: overview
-                    anchors {left: flashlight.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Overview"
-                    selectionParameter: "overview"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.useMode.get() === "overview")
-                }
-            }
+//            SelectorCluster{
+//                id: useModeSelector
+//                width: 320
+//                height: 94
+//                labelText: "Use Mode"
+//                onSelectedSignal: {
+//                    rootStateModel.useMode.set( selectionParameter );
+//                }
+//                SelectorButton{
+//                    id: flashlight
+//                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+//                    label: "Flashlight"
+//                    selectionParameter: "flashlight"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.useMode.get() === "flashlight")
+//                }
+//                SelectorButton{
+//                    id: overview
+//                    anchors {left: flashlight.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+//                    label: "Overview"
+//                    selectionParameter: "overview"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.useMode.get() === "overview")
+//                }
+//            }
+
             SelectorCluster{
                 id: soundModeSelector
                 width: 320
