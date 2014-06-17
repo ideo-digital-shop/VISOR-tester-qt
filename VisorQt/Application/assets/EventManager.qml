@@ -136,9 +136,9 @@ Item {
     function leftMotor(){
         var motorData = new Array;
         motorData.push("0");
-        motorData.push(rootStateModel.motorIntensity.get());
-        motorData.push(rootStateModel.motorDuration.get());
-        noamLemma.speak("PWMSet" , motorData);
+        motorData.push("" + rootStateModel.motorIntensity.get());
+        motorData.push("" + rootStateModel.motorDuration.get());
+        noamLemma.speak("PWMSet" , JSON.stringify(motorData));
         console.debug("sending motor turn");
         console.debug(JSON.stringify(motorData));
     }
@@ -146,9 +146,9 @@ Item {
     function rightMotor(){
         var motorData = new Array;
         motorData.push("1");
-        motorData.push(rootStateModel.motorIntensity.get());
-        motorData.push(rootStateModel.motorDuration.get());
-        noamLemma.speak("PWMSet" , motorData);
+        motorData.push("" + rootStateModel.motorIntensity.get());
+        motorData.push("" + rootStateModel.motorDuration.get());
+        noamLemma.speak("PWMSet" , JSON.stringify(motorData));
         console.debug("sending motor turn");
         console.debug(JSON.stringify(motorData));
     }
