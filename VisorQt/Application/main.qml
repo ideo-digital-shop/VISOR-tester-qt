@@ -70,18 +70,20 @@ Rectangle {
         }
     }
     NoamLemmaHears{
-        topic: "IMU"
+        topic: "IMU2"
         onNewEvent:{
             if( rootStateModel.headingSource.get() == "body" ){
-                mapView.heroModel.bulkOrientation = value[2] + 360 % 360;
+                var parsed = JSON.parse(value);
+                mapView.heroModel.bulkOrientation = (parseInt(parsed[2]) + 360) % 360;
             }
         }
     }
     NoamLemmaHears{
-        topic: "IMU2"
+        topic: "IMU"
         onNewEvent:{
             if( rootStateModel.headingSource.get() == "head" ){
-                mapView.heroModel.bulkOrientation = value[2] + 360 % 360;
+                var parsed = JSON.parse(value);
+                mapView.heroModel.bulkOrientation = (parseInt(parsed[2]) + 360) % 360;
             }
         }
     }
@@ -90,7 +92,7 @@ Rectangle {
         onNewEvent:{
             if(iPhoneThrottleTimer.running)return;
             if( rootStateModel.headingSource.get() == "gesture" ){
-                mapView.heroModel.bulkOrientation = value + 360 % 360;
+                mapView.heroModel.bulkOrientation = (value + 360) % 360;
                 iPhoneThrottleTimer.start();
             }
         }

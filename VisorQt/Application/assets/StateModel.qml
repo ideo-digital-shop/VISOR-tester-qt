@@ -23,7 +23,7 @@ Item {
     property bool fullButtonState: false
 
     NoamLemmaHears{
-        topic: "BTN1"
+        topic: "BTN2"
         onNewEvent:{
             if(!buttonEnabled.get())return;
             if( value == 1 || value == true ) halfButtonState = true;
@@ -41,7 +41,7 @@ Item {
     }
 
     NoamLemmaHears{
-        topic: "BTN2"
+        topic: "BTN3"
         onNewEvent:{
             if(!buttonEnabled.get())return;
             if( value == 1 || value == true ) fullButtonState = true;
