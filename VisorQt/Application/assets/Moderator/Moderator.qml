@@ -223,7 +223,15 @@ Rectangle{
                     height: 30
                     active: (rootStateModel.soundMode.get() == "mono")
                 }
-            }
+            }                                                
+        }
+
+        Column{
+            id: columnB
+            width: 340
+            spacing: 20
+            height: container.height
+            anchors {left: columnA.right; leftMargin: 20}
             SelectorCluster{
                 id: feedbackModeSelector
                 width: 320
@@ -307,136 +315,6 @@ Rectangle{
 
                 }
             }
-
-            ListView{
-                id: orthographyView
-                function selected(index){ selectedSignal(index);}
-                signal selectedSignal(int index)
-                height: 400
-                width: 140
-                spacing: 3
-                //                    model: rootVehicleStatusModel.voiceModel.currentOrthography
-                delegate: Rectangle{
-                    id: orthDelegateItem
-                    Component.onCompleted: {
-                        orthographyView.selectedSignal.connect(selectTest);
-                        selectMe.connect(orthographyView.selected);
-                    }
-                    width:orthographyView.width
-                    height: 24
-                    color: "#A0201060"
-                    Behavior on color{ColorAnimation{duration:200}}
-                    function selectTest(ind){
-                        if(ind!=index){
-                            if (typeof orthDelegateItem != typeof undefined){
-                                orthDelegateItem.color = "#A0201060";
-                                orthDelText.color = "#F9F9F9";
-                            }
-                        }
-                    }
-                    signal selectMe (int ind)
-                    Text{id: orthDelText
-                        font.pixelSize: 16
-                        width: parent.width-4
-                        clip:true
-                        anchors{verticalCenter:parent.verticalCenter; left: parent.left; leftMargin: 2}
-                        color: "#F9F9F9"
-                        Behavior on color{ColorAnimation{duration:200}}
-                        text:orthographyView.model[index]
-                    }
-                    MouseArea{
-                        anchors{fill:parent}
-                        onPressed: {
-                            orthDelegateItem.color = "#A0A0A0";
-                            orthDelText.color = "#302020";
-                            orthDelegateItem.selectMe(index);
-                        }
-                        onDoubleClicked: {
-                            var orthArray = root.selectedOrthographies
-                            orthArray.push(orthographyView.model[index]);
-                            root.selectedOrthographies = orthArray;
-                        }
-                    }
-                }
-            }
-            Row{id: voiceButtons
-                spacing: 10
-                Button{id: sendButton
-                    width: 75
-                    height: 40
-                    label: "SEND"
-                    fillColor: "#0A2036"
-                    textColor: "#DFDFDF"
-                    animateClick: true
-                    onClicked: {
-                        var selectedOrth = root.selectedOrthographies;
-                        var orthArray = new Array(0);
-                        for(var i=0; i< selectedOrth.length; i++){
-                            orthArray[i]=new Array(0);
-                            orthArray[i].push(i);
-                            orthArray[i].push(7500);
-                            orthArray[i].push(selectedOrth[i]);
-                        }
-                        eventSender.send("voiceResults", orthArray);
-                    }
-                }
-                Button{id: clearButton
-                    width: 75
-                    height: 40
-                    label: "CLEAR"
-                    fillColor: "#0A2036"
-                    textColor: "#DFDFDF"
-                    animateClick: true
-                    onClicked: {
-                        var selOrth = [];
-                        root.selectedOrthographies = selOrth;
-                    }
-                }
-            }
-            Row{id: triggerButtons
-                spacing: 10
-                Button{id: thinking
-                    width: 120
-                    height: 40
-                    label: "THINKING"
-                    fillColor: "#0A2036"
-                    textColor: "#DFDFDF"
-                    animateClick: true
-                    onClicked: {
-                        eventSender.send("toggleVoiceThinking", 1);
-                    }
-                }
-            }
-            ListView{id: selOrthView
-                height: 100
-                width: 140
-                spacing: 3
-                model: root.selectedOrthographies
-                delegate: Rectangle{id: selOrthDelegate
-                    width:selOrthView.width
-                    height: 24
-                    color: "#4080A0FF"
-
-                    Text{
-                        font.pixelSize: 16
-                        width: parent.width-4
-                        clip:true
-                        anchors{verticalCenter:parent.verticalCenter; left: parent.left; leftMargin: 2}
-                        color: "#F9F9F9"
-                        text:selOrthView.model[index]
-                    }
-                }
-            }
-
-        }
-
-        Column{
-            id: columnB
-            width: 340
-            spacing: 20
-            height: container.height
-            anchors {left: columnA.right; leftMargin: 20}
-
             Item{width:1;height:1}
             Rectangle {
                 id: nudgeCluster

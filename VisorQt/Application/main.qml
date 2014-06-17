@@ -136,7 +136,7 @@ Rectangle {
         id: divider
         height: parent.height
         width: 4
-        x: 600
+        x: 50
         color: "#7B7"
         MouseArea{
             anchors.fill: parent
