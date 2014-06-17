@@ -294,6 +294,28 @@ NetworkGraph {
             }
         }
 
+
+        // D Shop EE Table
+        Segment{
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 484; y1: 100; x2: 584; y2: 100; tag: "table"}
+                ListElement{type: "linear"; x1: 584; y1: 100; x2: 584; y2: 0; tag: "table"}
+                ListElement{type: "linear"; x1: 584; y1: 0; x2: 484; y2: 0; tag: "table"}
+                ListElement{type: "linear"; x1: 484; y1: 0; x2: 484; y2: 100; tag: "table"}
+            }
+        }
+        // Chair
+        Segment{
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 450; y1: 50; x2: 466; y2: 50; tag: "chair"}
+                ListElement{type: "linear"; x1: 466; y1: 50; x2: 466; y2: 66; tag: "chair"}
+                ListElement{type: "linear"; x1: 466; y1: 66; x2: 450; y2: 66; tag: "chair"}
+                ListElement{type: "linear"; x1: 450; y1: 66; x2: 450; y2: 50; tag: "chair"}
+
+            }
+        }
+
+
         // D-shop center Table obstacle
         Segment{
             segmentSections: ListModel{
@@ -450,6 +472,7 @@ NetworkGraph {
 
             }
         }
+
 
 
 //        Segment{ // Far west loop, lower curve
