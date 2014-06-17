@@ -181,6 +181,7 @@ NetworkGraph {
             }
         }
         Segment{ // wall communal
+
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 1018; y1: 489; x2: 1018; y2: 491; tag: "wall"}
             }

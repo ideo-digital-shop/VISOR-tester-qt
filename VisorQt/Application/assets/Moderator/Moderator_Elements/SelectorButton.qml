@@ -5,7 +5,7 @@ Button {
     signal clearedSignal
 
     property int childIndex: -1
-    property var selectionParameter
+    property string selectionParameter: "wat"
 
     onClicked: {
         if(!active){

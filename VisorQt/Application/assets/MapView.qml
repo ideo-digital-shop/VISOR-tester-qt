@@ -17,6 +17,7 @@ import "Moderator/Moderator_Elements"
 
 Rectangle {
     property alias mapData: mapData
+    property alias heroModel: heroModel
     property variant mapEvaluation: mapData.evaluateMap( heroModel )
 
     clip: true

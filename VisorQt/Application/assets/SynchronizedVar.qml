@@ -12,7 +12,7 @@ Item {
     }
 
     function set( inValue ){
-        if( noamIsConnected ){
+        if( noamIsConnected ){            
             noamLemma.speak( synchMessageName , inValue );
             responseTimeout.start();
         }

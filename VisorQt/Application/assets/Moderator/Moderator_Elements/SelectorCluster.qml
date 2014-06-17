@@ -31,7 +31,7 @@ Rectangle {
             if( i != genIndex){
                 if( children[i].clearSelection )children[i].clearSelection();
             }
-            else{
+            else{                
                 selectedSignal( children[i].selectionParameter );
             }
         }

@@ -31,6 +31,20 @@ Rectangle {
 
     property string recMessage: ""
 
+    signal sendFlashSignal()
+
+    function connectEventManager(){
+        sendFlashSignal.connect( eventManager.sendFlashlightEvent );
+        eventManager.connect();
+        console.log("Signals connected successfully.")
+    }
+
+    function disconnectEventManager(){
+        sendFlashSignal.disconnect( eventManager.sendFlashlightEvent );
+        eventManager.disconnect();
+        console.log("Signals disconnected successfully.")
+    }
+
     //Hear Noam message
     NoamLemmaHears{
         topic: "sampleMessage"
@@ -39,14 +53,26 @@ Rectangle {
         }
     }
 
+    NoamLemmaHears{
+        topic: "sendFlashSignal"
+        onNewEvent:{
+            sendFlashSignal();
+        }
+    }
+
     StateModel{
         id: rootStateModel
+        onIsEventControllerChanged: {
+            if( isEventController ) connectEventManager();
+            else disconnectEventManager();
+        }
     }
 
     EventManager{
         id: eventManager
         mapData: mapView.mapData
         evaluation: mapView.mapEvaluation
+        heroModel: mapView.heroModel
     }
 
     Moderator{
@@ -103,19 +129,19 @@ Rectangle {
         onConnectionLost: noamIsConnected = false;
     }
 
-    property int sendOrient: 0
-    Timer{
-        id: testTimer
-        running:true
-        repeat:true
-        interval: 50
-        onTriggered: {
-            noamLemma.speak( "heroOrientation" , sendOrient );
-            sendOrient++;
-            if( sendOrient > 360 ) sendOrient = 0;
-            //            var mapEvaluation = mapData.evaluatePointToGraph( mapRenderer.hero.heroPositionMeters );
-            //            sampleText.text = mapEvaluation.errorVector.magnitude.toFixed(1);
-            //            mapRenderer.closestPoint = mapData.getNetworkCoord( mapEvaluation.networkPosition );
-        }
-    }
+//    property int sendOrient: 0
+//    Timer{
+//        id: testTimer
+//        running:true
+//        repeat:true
+//        interval: 50
+//        onTriggered: {
+////            noamLemma.speak( "heroOrientation" , sendOrient );
+////            sendOrient++;
+////            if( sendOrient > 360 ) sendOrient = 0;
+//            //            var mapEvaluation = mapData.evaluatePointToGraph( mapRenderer.hero.heroPositionMeters );
+//            //            sampleText.text = mapEvaluation.errorVector.magnitude.toFixed(1);
+//            //            mapRenderer.closestPoint = mapData.getNetworkCoord( mapEvaluation.networkPosition );
+//        }
+//    }
 }
