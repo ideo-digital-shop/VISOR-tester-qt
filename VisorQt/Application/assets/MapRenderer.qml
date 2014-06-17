@@ -27,7 +27,9 @@ Rectangle {
         antialiasing: true
         anchors.fill: parent
         anchors{ leftMargin: 20; rightMargin: 20; topMargin: 20; bottomMargin: 20 }
-        property point canvasOrigin: Qt.point( 0 , 0 )        
+        property point canvasOrigin: Qt.point( 0 , 0 )
+        onWidthChanged: requestPaint()
+        onHeightChanged: requestPaint()
         onPaint: {
             if(!validData){
                 console.warn("renderer has no valid map data!");
@@ -40,7 +42,7 @@ Rectangle {
             ctx.lineCap = "round"
             ctx.lineJoin = "round"
 
-            ctx.strokeStyle = simpleStyle
+//            ctx.strokeStyle = "#FFA000"
             ctx.lineWidth = simpleWidth
 
             var pixelStartPoint
@@ -51,6 +53,8 @@ Rectangle {
 
             for(var i = 0; i < mapData.nSegments; i++){
                 currSegment = mapData.getSegment(i)
+                if( currSegment.isTarget )ctx.strokeStyle = "#FFA000";
+                else ctx.strokeStyle = "white";
                 mapPoint = currSegment.pathCoord(0)
                 pixelMapPoint = RouteRendererFunctions.metersToPixels( mapPoint )
                 pixelStartPoint = Qt.point(pixelMapPoint.x-routeCanvas.x, pixelMapPoint.y-routeCanvas.y)
@@ -61,7 +65,7 @@ Rectangle {
                     RouteRendererFunctions.renderSection(ctx, canvasOrigin, currentSection, 1)
                 }
                 ctx.stroke()
-            }            
+            }
         }
         //            onRouteDataChanged: {requestPaint()}
 
@@ -71,45 +75,45 @@ Rectangle {
             pixelsPerMeterScale: root.pixelsPerMeterScale
         }
 
-        Repeater{
-            id: segmentProximities
-            model: evaluation.proximityEvaluation.segmentEvalArray
-            anchors.fill: parent
-            Rectangle{
-                smooth:true; antialiasing: true
-                width: 23
-                height: width
-                radius: width/2
-                color: "transparent"
-                border.color: "#480"
-                border.width: 1.5
-                property var posPoint: evaluation.proximityEvaluation.segmentEvalArray[index].cartPosition
-                property point pixelLocation: posPoint ? RouteRendererFunctions.metersToPixels( posPoint ) : Qt.point(-50,-50)
-                x: pixelLocation.x - width/2
-                y: pixelLocation.y - height/2
-            }
-        }
+//        Repeater{
+//            id: segmentProximities
+//            model: evaluation.proximityEvaluation.segmentEvalArray
+//            anchors.fill: parent
+//            Rectangle{
+//                smooth:true; antialiasing: true
+//                width: 23
+//                height: width
+//                radius: width/2
+//                color: "transparent"
+//                border.color: "#480"
+//                border.width: 1.5
+//                property var posPoint: evaluation.proximityEvaluation.segmentEvalArray[index].cartPosition
+//                property point pixelLocation: posPoint ? RouteRendererFunctions.metersToPixels( posPoint ) : Qt.point(-50,-50)
+//                x: pixelLocation.x - width/2
+//                y: pixelLocation.y - height/2
+//            }
+//        }
 
-        Rectangle{
-            id: closestPointIcon
-            color: "#8F0"
-            width: 10
-            height: width
-            radius: width/2
-            property point pixelLocation: RouteRendererFunctions.metersToPixels( evaluation.proximityEvaluation.cartPosition )
-            x: pixelLocation.x - width/2
-            y: pixelLocation.y - height/2
-            Rectangle{
-                anchors.centerIn: parent
-                smooth: true
-                width:36
-                height: width
-                radius: width/2
-                color: "transparent"
-                border.color: closestPointIcon.color
-                border.width: 3
-            }
-        }
+//        Rectangle{
+//            id: closestPointIcon
+//            color: "#8F0"
+//            width: 10
+//            height: width
+//            radius: width/2
+//            property point pixelLocation: RouteRendererFunctions.metersToPixels( evaluation.proximityEvaluation.cartPosition )
+//            x: pixelLocation.x - width/2
+//            y: pixelLocation.y - height/2
+//            Rectangle{
+//                anchors.centerIn: parent
+//                smooth: true
+//                width:36
+//                height: width
+//                radius: width/2
+//                color: "transparent"
+//                border.color: closestPointIcon.color
+//                border.width: 3
+//            }
+//        }
 
         Rectangle{
             id: headingPointIcon
@@ -149,6 +153,7 @@ Rectangle {
 //                testObj.param1 = 43;
 //                testObj.param2 = "hey derr";
 //                noamLemma.speak( "maxTestMap" , testObj);
+                if(!rootStateModel.isEventController) return;
                 posPoint.x = Qt.binding( function() { return (mouseX - mouseArea.x)/pixelsPerMeterScale } )
                 posPoint.y = Qt.binding( function() { return (mouseY - mouseArea.y)/pixelsPerMeterScale } )
             }

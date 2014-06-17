@@ -41,7 +41,7 @@ Rectangle{
                 x:8
                 width: 200
                 height: 30
-                label: active ? "Is Event Controller" : "Not Event Controller"
+                label: active ? "Is Mouse Controller" : "Is Moderator"
                 active: rootStateModel.isEventController
                 onClicked: rootStateModel.isEventController = !rootStateModel.isEventController;
             }
@@ -67,11 +67,20 @@ Rectangle{
                 active: rootStateModel.flashlightIsScanning.get()
                 onClicked: rootStateModel.flashlightIsScanning.set( !rootStateModel.flashlightIsScanning.get() );
             }
+            Button{
+                id: toggleVibeMode
+                x:8
+                width: 200
+                height: 30
+                label: active ? "Vibe Mode On" : "Vibe Mode Off"
+                active: rootStateModel.vibeMode.get()
+                onClicked: rootStateModel.vibeMode.set(!rootStateModel.vibeMode.get());
+            }
             ValueSlider{
                 id: repeatTimeSlider
                 sliderWidth: 240
-                minValue: .2
-                maxValue: 10
+                minValue: .15
+                maxValue: 5
                 initialValue: rootStateModel.repeatTime.initialValue;
                 labelText: "Repeat Time"
                 onCurrentValueChanged: {
@@ -98,6 +107,30 @@ Rectangle{
                 labelText: "Distance Threshold - ft"
                 onCurrentValueChanged: {
                     rootStateModel.distanceThresholdIn.set( targetSynch * 12 );
+                }
+            }
+            ValueSlider{
+                id: motorIntensitySlider
+                sliderWidth: 240
+                minValue: 400
+                maxValue: 4095
+                intMode: true
+                initialValue: parseInt( rootStateModel.motorIntensity.initialValue );
+                labelText: "Motor Intensity"
+                onCurrentValueChanged: {
+                    rootStateModel.motorIntensity.set( parseInt(targetSynch).toString() );
+                }
+            }
+            ValueSlider{
+                id: motorDurationSlider
+                sliderWidth: 240
+                minValue: 150
+                maxValue: 5000
+                intMode: true
+                initialValue: parseInt( rootStateModel.motorDuration.initialValue );
+                labelText: "Motor Duration"
+                onCurrentValueChanged: {
+                    rootStateModel.motorDuration.set( parseInt(targetSynch).toString() );
                 }
             }
 
@@ -396,6 +429,142 @@ Rectangle{
             }
 
         }
+
+        Column{
+            id: columnB
+            width: 340
+            spacing: 20
+            height: container.height
+            anchors {left: columnA.right; leftMargin: 20}
+
+            Item{width:1;height:1}
+            Rectangle {
+                id: nudgeCluster
+                width: 320
+                height: 46
+                color: "#68555555"
+                radius: 2
+                Button{
+                    id: nudgeLeft
+                    width: 140
+                    height: 30
+                    anchors {left: parent.left; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "Nudge Left"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: eventManager.nudgeLeft();
+                }
+                Button{
+                    id: nudgeRight
+                    width: 140
+                    height: 30
+                    anchors {left: nudgeLeft.right; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "Nudge Right"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: eventManager.nudgeRight();
+                }
+            }
+            Rectangle {
+                id: turnCluster
+                width: 320
+                height: 46
+                color: "#68555555"
+                radius: 2
+                Button{
+                    id: turnLeft
+                    width: 140
+                    height: 30
+                    anchors {left: parent.left; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "Turn Left"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: eventManager.turnLeft();
+                }
+                Button{
+                    id: turnRight
+                    width: 140
+                    height: 30
+                    anchors {left: turnLeft.right; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "Turn Right"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: eventManager.turnRight();
+                }
+            }
+            Rectangle {
+                id: uiCluster
+                width: 320
+                height: 46
+                color: "#68555555"
+                radius: 2
+                Button{
+                    id: confirmArrival
+                    width: 150
+                    height: 30
+                    anchors {left: parent.left; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "Confirm Arrive"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: noamLemma.speak("confirmArrival" , true);
+                }
+                Button{
+                    id: confirmBegin
+                    width: 150
+                    height: 30
+                    anchors {left: confirmArrival.right; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "Confirm Begin"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: noamLemma.speak("confirmRouteBegin" , true);
+                }
+            }
+            Button{
+                id: buttonEnableToggle
+                x:8
+                width: 175
+                height: 30
+                label: active ? "Button Enabled" : "Button Disabled"
+                active: rootStateModel.buttonEnabled.get()
+                onClicked: rootStateModel.buttonEnabled.set( !rootStateModel.buttonEnabled.get() );
+            }
+            Rectangle {
+                id: buttonStatuses
+                width: 320
+                height: 96
+                color: "#68555555"
+                radius: 2
+                Button{
+                    id: b1Status
+                    width: 80
+                    height: 80
+                    anchors {left: parent.left; top: parent.top; leftMargin: 8; topMargin: 8}
+                    label: "B1"
+                    radius: 0
+                    border.color: "cyan"
+                    active: rootStateModel.buttonEnabled.get() ? rootStateModel.halfButtonState : false
+                    MouseArea{anchors.fill:parent} //deactivate control
+                }
+                Button{
+                    id: b2Status
+                    width: 80
+                    height: 80
+                    anchors {left: b1Status.right; top: parent.top; leftMargin: 20; topMargin: 8}
+                    label: "B2"
+                    radius: 0
+                    border.color: "cyan"
+                    active: rootStateModel.buttonEnabled.get() ? rootStateModel.fullButtonState : false
+                    MouseArea{anchors.fill:parent} //deactivate control
+                }
+            }
+        }
+
         /*
 
         Column{

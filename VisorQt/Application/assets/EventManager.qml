@@ -35,7 +35,7 @@ Item {
     }
 
     onFullButtonStateChanged: {
-        if(!connected)return;
+        if(!connected || !fullButtonState)return;
         if( useMode !== "off" ){
             waitForFullPressTimer.stop();
             if( useMode === "flashlight"){
@@ -78,7 +78,13 @@ Item {
         eventDataObj.object1 = buildFlashlightObject();
         eventDataObj.objectsLength = 1;
         console.debug(JSON.stringify(eventDataObj));
-        noamLemma.speak( "flashlightTrigger" , eventDataObj );
+        if( eventDataObj.feedbackMode != "silent" ){
+            noamLemma.speak( "flashlightTrigger" , eventDataObj );
+        }
+        if( eventDataObj.feedbackMode == "silent" || rootStateModel.vibeMode.get() ){
+            leftMotor();
+            rightMotor();
+        }
     }
     function sendOverviewEvent(){
 
@@ -87,7 +93,7 @@ Item {
         var curElement = new Object;
         curElement.heading = 0;
         if( !evaluation.headingEvaluation.displacementMag ){
-            curElement.type = "none"
+            curElement.type = "None"
             curElement.magnitude = 0;
             curElement.name = "";
         }
@@ -97,12 +103,54 @@ Item {
             curElement.type = targetSeg.segmentType;
             curElement.name = targetSeg.segmentName;
         }
+        if(curElement.magnitude > rootStateModel.distanceThresholdIn.get()){
+            curElement.type = "None"
+            curElement.magnitude = 0;
+            curElement.name = "";
+        }
+
         return curElement;
     }
 
     function buildOverviewObjectList(){
         var objectList = new Array;
         var curElement = new Object;
+    }
+    function nudgeLeft(){
+        noamLemma.speak("nudgeLeft", true);
+        if( rootStateModel.vibeMode.get() ) leftMotor();
+    }
+    function nudgeRight(){
+        noamLemma.speak("nudgeRight", true);
+        if( rootStateModel.vibeMode.get() ) rightMotor();
+    }
+    function turnLeft(){
+        noamLemma.speak("turnLeft", true);
+        if( rootStateModel.vibeMode.get() ) leftMotor();
+    }
+    function turnRight(){
+        noamLemma.speak("turnRight", true);
+        if( rootStateModel.vibeMode.get() ) rightMotor();
+    }
+
+    function leftMotor(){
+        var motorData = new Array;
+        motorData.push("0");
+        motorData.push(rootStateModel.motorIntensity.get());
+        motorData.push(rootStateModel.motorDuration.get());
+        noamLemma.speak("PWMSet" , motorData);
+        console.debug("sending motor turn");
+        console.debug(JSON.stringify(motorData));
+    }
+
+    function rightMotor(){
+        var motorData = new Array;
+        motorData.push("1");
+        motorData.push(rootStateModel.motorIntensity.get());
+        motorData.push(rootStateModel.motorDuration.get());
+        noamLemma.speak("PWMSet" , motorData);
+        console.debug("sending motor turn");
+        console.debug(JSON.stringify(motorData));
     }
 
     Timer{

@@ -37,8 +37,8 @@ Item {
     property real speedLimit: 56
 
     property bool isTarget: false
-    property string segmentName: "wall"
-    property string segmentType: "unknown"
+    property string segmentName: "Wall"
+    property string segmentType: "Thing"
 
     //----------------------------------------------------------------------------------------------------------------------------------//
 

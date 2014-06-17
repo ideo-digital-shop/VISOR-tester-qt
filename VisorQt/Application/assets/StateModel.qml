@@ -14,25 +14,48 @@ Item {
     property alias flashlightScanMode: flashlightScanModeSynch
     property alias flashlightIsScanning: flashlightIsScanningSynch
     property alias headingSource: headingSourceSynch
+    property alias motorIntensity: motorIntensitySynch
+    property alias motorDuration: motorDurationSynch
+    property alias vibeMode: vibeModeSynch
+    property alias buttonEnabled: buttonEnabledSynch
 
     property bool halfButtonState: false
     property bool fullButtonState: false
 
     NoamLemmaHears{
-        topic: "halfButtonState"
+        topic: "BTN1"
         onNewEvent:{
+            if(!buttonEnabled.get())return;
             if( value == 1 || value == true ) halfButtonState = true;
             else halfButtonState = false;
+            b1ResetTimer.restart();
             console.debug("hb press: " + halfButtonState);
         }
     }
+    Timer{
+        id: b1ResetTimer
+        interval: 275
+        running: false
+        repeat: false
+        onTriggered: halfButtonState = false;
+    }
+
     NoamLemmaHears{
-        topic: "fullButtonState"
+        topic: "BTN2"
         onNewEvent:{
+            if(!buttonEnabled.get())return;
             if( value == 1 || value == true ) fullButtonState = true;
             else fullButtonState = false;
+            b2ResetTimer.restart();
             console.debug("hb press: " + fullButtonState);
         }
+    }
+    Timer{
+        id: b2ResetTimer
+        interval: 275
+        running: false
+        repeat: false
+        onTriggered: fullButtonState = false;
     }
 
     ///////////////
@@ -44,12 +67,12 @@ Item {
     }
     SynchronizedVar{
         id: repeatTimeSynch
-        initialValue: 5
+        initialValue: 2
         synchMessageName: "repeatTimeSynch"
     }
     SynchronizedVar{
         id: distanceThresholdInSynch
-        initialValue: 240
+        initialValue: 360
         synchMessageName: "distanceThresholdInSynch"
     }
     SynchronizedVar{
@@ -91,5 +114,25 @@ Item {
         id: headingSourceSynch
         initialValue: "body"
         synchMessageName: "headingSourceSynch"
+    }
+    SynchronizedVar{
+        id: motorIntensitySynch
+        initialValue: "4095"
+        synchMessageName: "motorIntensitySynch"
+    }
+    SynchronizedVar{
+        id: motorDurationSynch
+        initialValue: "500"
+        synchMessageName: "motorDurationSynch"
+    }
+    SynchronizedVar{
+        id: vibeModeSynch
+        initialValue: 0
+        synchMessageName: "vibeModeSynch"
+    }
+    SynchronizedVar{
+        id: buttonEnabledSynch
+        initialValue: 1
+        synchMessageName: "buttonEnabledSynch"
     }
 }

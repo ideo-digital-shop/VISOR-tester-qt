@@ -9,15 +9,14 @@ Item {
     property real orientationOffset: rootStateModel.heroOrientationOffset.get()
     property real heroHead: heroOrientation - 180
 
-    NoamLemmaHears{
-        topic: "heroOrientation"
-        onNewEvent:{
-            bulkOrientation = value % 360;
-        }
-    }
-
     function setPosition( posPoint ){
         heroPositionMeters.x = posPoint.x;
         heroPositionMeters.y = posPoint.y;
+        if(rootStateModel.isEventController){
+            var posObj = new Object;
+            posObj.x = posPoint.x;
+            posObj.y = posPoint.y;
+            noamLemma.speak( "heroPosSynch" , posObj );
+        }
     }
 }

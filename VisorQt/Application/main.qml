@@ -59,6 +59,48 @@ Rectangle {
             sendFlashSignal();
         }
     }
+    NoamLemmaHears{
+        topic: "heroPosSynch"
+        onNewMapEvent: {
+            if( !rootStateModel.isEventController ){
+                var newPos = Qt.point( value.x , value.y );
+                console.debug("new pos: " + newPos.x + ", " + newPos.y);
+                mapView.heroModel.setPosition( newPos );
+            }
+        }
+    }
+    NoamLemmaHears{
+        topic: "IMU"
+        onNewEvent:{
+            if( rootStateModel.headingSource.get() == "body" ){
+                mapView.heroModel.bulkOrientation = value[2] + 360 % 360;
+            }
+        }
+    }
+    NoamLemmaHears{
+        topic: "IMU2"
+        onNewEvent:{
+            if( rootStateModel.headingSource.get() == "head" ){
+                mapView.heroModel.bulkOrientation = value[2] + 360 % 360;
+            }
+        }
+    }
+    NoamLemmaHears{
+        topic: "iPhoneHeading"
+        onNewEvent:{
+            if(iPhoneThrottleTimer.running)return;
+            if( rootStateModel.headingSource.get() == "gesture" ){
+                mapView.heroModel.bulkOrientation = value + 360 % 360;
+                iPhoneThrottleTimer.start();
+            }
+        }
+    }
+    Timer{
+        id: iPhoneThrottleTimer
+        interval: 75
+        running: false
+        repeat: false
+    }
 
     StateModel{
         id: rootStateModel
@@ -94,7 +136,7 @@ Rectangle {
         id: divider
         height: parent.height
         width: 4
-        x: 200
+        x: 600
         color: "#7B7"
         MouseArea{
             anchors.fill: parent
@@ -129,19 +171,19 @@ Rectangle {
         onConnectionLost: noamIsConnected = false;
     }
 
-//    property int sendOrient: 0
-//    Timer{
-//        id: testTimer
-//        running:true
-//        repeat:true
-//        interval: 50
-//        onTriggered: {
-////            noamLemma.speak( "heroOrientation" , sendOrient );
-////            sendOrient++;
-////            if( sendOrient > 360 ) sendOrient = 0;
-//            //            var mapEvaluation = mapData.evaluatePointToGraph( mapRenderer.hero.heroPositionMeters );
-//            //            sampleText.text = mapEvaluation.errorVector.magnitude.toFixed(1);
-//            //            mapRenderer.closestPoint = mapData.getNetworkCoord( mapEvaluation.networkPosition );
-//        }
-//    }
+    //    property int sendOrient: 0
+    //    Timer{
+    //        id: testTimer
+    //        running:true
+    //        repeat:true
+    //        interval: 50
+    //        onTriggered: {
+    ////            noamLemma.speak( "heroOrientation" , sendOrient );
+    ////            sendOrient++;
+    ////            if( sendOrient > 360 ) sendOrient = 0;
+    //            //            var mapEvaluation = mapData.evaluatePointToGraph( mapRenderer.hero.heroPositionMeters );
+    //            //            sampleText.text = mapEvaluation.errorVector.magnitude.toFixed(1);
+    //            //            mapRenderer.closestPoint = mapData.getNetworkCoord( mapEvaluation.networkPosition );
+    //        }
+    //    }
 }

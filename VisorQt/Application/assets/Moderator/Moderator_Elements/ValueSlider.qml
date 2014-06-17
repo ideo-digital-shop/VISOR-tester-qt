@@ -14,6 +14,7 @@ Item{id: root
     property int sliderWidth: 100
     property int decimalPlaces: 0
     property real initialValue: 0
+    property bool intMode: false
 
     Component.onCompleted: {
         targetSynch = initialValue;
@@ -45,6 +46,7 @@ Item{id: root
         active: true
         gradientOpacity: .25
         onClicked: {
+            if(intMode) targetSynch = parseInt((mouseArea.mouseX/(sliderWidth-sliderButton.width)) * (maxValue - minValue) + minValue);
             targetSynch = ((mouseArea.mouseX/(sliderWidth-sliderButton.width)) * (maxValue - minValue) + minValue);
             sliderButton.refreshPosition();
         }
@@ -63,7 +65,10 @@ Item{id: root
         mouseArea.drag.maximumX: sliderWidth-width;
         mouseArea.drag.minimumX: 0;
         mouseArea.drag.target: sliderButton
-        onXChanged: targetSynch = ((x/(sliderWidth-width)) * (maxValue - minValue) + minValue);
+        onXChanged: {
+            if(intMode) targetSynch = ((x/(sliderWidth-width)) * (maxValue - minValue) + minValue);
+            else targetSynch = ((x/(sliderWidth-width)) * (maxValue - minValue) + minValue);
+        }
         function refreshPosition(){
             x = (targetSynch - minValue)/(maxValue - minValue) * (sliderWidth-width);
         }
@@ -71,7 +76,7 @@ Item{id: root
     Text {
         id: sliderValue
         width: 30
-        text: targetSynch.toFixed(1)
+        text: intMode ? targetSynch.toFixed(0) : targetSynch.toFixed(1)
         anchors {verticalCenter: sliderSlot.verticalCenter; left: sliderSlot.right; leftMargin: 20}        
         font.pixelSize: 18
         color: "#DFDFDF"

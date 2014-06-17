@@ -17,8 +17,16 @@ import "Moderator/Moderator_Elements"
 
 Rectangle {
     property alias mapData: mapData
-    property alias heroModel: heroModel
-    property variant mapEvaluation: mapData.evaluateMap( heroModel )
+    property alias heroModel: heroModel    
+    property variant mapEvaluation:mapData.evaluateMap( heroModel );
+
+    Timer{ //once triggered breaks binding, switches to timer mode
+        id: mapEvaluationTimer
+        interval: 40
+        running: true
+        repeat: true
+        onTriggered: mapEvaluation = mapData.evaluateMap( heroModel );
+    }
 
     clip: true
     width: 300

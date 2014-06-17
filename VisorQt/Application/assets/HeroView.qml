@@ -31,7 +31,6 @@ Item {
             var ctx = heroPointerCanvas.getContext('2d')
             ctx.clearRect(0, 0, heroPointerCanvas.width, heroPointerCanvas.height)
 
-
             ctx.lineJoin = "round"
             ctx.strokeStyle = "#DD0"
             ctx.lineWidth = 1.5
@@ -44,7 +43,6 @@ Item {
         }
     }
 
-
     Rectangle{
         id: heroIcon
         smooth: true
@@ -56,6 +54,18 @@ Item {
         color: "#D80"
         border.color: "#DD0"
         border.width: 1.5
+        Rectangle{
+            id: distThresh
+            smooth: true
+            antialiasing: true
+            width: 2 * pixelsPerMeterScale * rootStateModel.distanceThresholdIn.get()
+            height: width
+            radius: width / 2
+            anchors.centerIn: parent
+            color: "transparent"
+            border.color: "#D03"
+            border.width: 1
+        }
     }
     Text{
         x:25

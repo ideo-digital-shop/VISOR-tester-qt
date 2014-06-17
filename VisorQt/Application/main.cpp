@@ -16,7 +16,7 @@ int main(int argc, char *argv[])
         QQuickView view;
 
         //instantiate lemma with GuestName and desired RoomName (blank string for Free Guest).
-        Lemma * lemma = new Lemma(&view, "QtVisorEvan", "");
+        Lemma * lemma = new Lemma(&view, "QtVisorEvan2", "");
         lemma->start();
 
         qmlRegisterType<CursorShapeArea>("MyTools", 1, 0, "CursorShapeArea");

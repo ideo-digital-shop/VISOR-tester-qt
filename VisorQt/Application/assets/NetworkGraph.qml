@@ -174,9 +174,9 @@ Item {
             }
         }
 
-        result.errorVector = errorVector;
-        result.networkPosition = networkPosition;
-        result.cartPosition = getNetworkCoord( networkPosition );
+//        result.errorVector = errorVector;
+//        result.networkPosition = networkPosition;
+//        result.cartPosition = getNetworkCoord( networkPosition );
         result.segmentEvalArray = segmentEvalArray;
 
         return result;
