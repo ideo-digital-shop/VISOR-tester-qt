@@ -245,44 +245,44 @@ Rectangle{
             spacing: 20
             height: container.height
             anchors {left: columnA.right; leftMargin: 20}
-            SelectorCluster{
-                id: feedbackModeSelector
-                width: 320
-                height: 134
-                labelText: " Feedback Mode"
-                onSelectedSignal: {
-                    // rootStateModel.feedbackMode.set( selectionParameter );
-                }
-                SelectorButton{
-                    id: standing
-                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Standing"
-                    selectionParameter: "standing"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.feedbackMode.get() === "standing")
-                }
-                SelectorButton{
-                    id: moving
-                    enabled: false
-                    anchors {left: standing.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Moving"
-                    selectionParameter: "moving"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.feedbackMode.get() === "moving")
-                }
-                SelectorButton{
-                    id: silent
-                    anchors {left: moving.left; top: moving.bottom; topMargin:8}
-                    label: "Silent"
-                    enabled: false
-                    selectionParameter: "silent"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.feedbackMode.get() === "silent")
-                }
-            }
+//            SelectorCluster{
+//                id: feedbackModeSelector
+//                width: 320
+//                height: 134
+//                labelText: " Feedback Mode"
+//                onSelectedSignal: {
+//                    // rootStateModel.feedbackMode.set( selectionParameter );
+//                }
+//                SelectorButton{
+//                    id: standing
+//                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+//                    label: "Standing"
+//                    selectionParameter: "standing"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.feedbackMode.get() === "standing")
+//                }
+//                SelectorButton{
+//                    id: moving
+//                    enabled: false
+//                    anchors {left: standing.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+//                    label: "Moving"
+//                    selectionParameter: "moving"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.feedbackMode.get() === "moving")
+//                }
+//                SelectorButton{
+//                    id: silent
+//                    anchors {left: moving.left; top: moving.bottom; topMargin:8}
+//                    label: "Silent"
+//                    enabled: false
+//                    selectionParameter: "silent"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.feedbackMode.get() === "silent")
+//                }
+//            }
             SelectorCluster{
                 id: imuSelector
                 width: 320

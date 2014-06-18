@@ -65,9 +65,11 @@ Item {
         eventDataObj.soundMode = rootStateModel.soundMode.get();
         eventDataObj.feedbackMode = rootStateModel.feedbackMode.get();
         eventDataObj.object1 = buildFlashlightObject();
+        if(eventDataObj.object1.magnitude > 10*12) eventDataObj.object1.magnitude = 30*12;
+        else eventDataObj.object1.magnitude = 1;
         eventDataObj.objectsLength = 1;
         if( eventDataObj.feedbackMode != "silent"){
-            if(eventDataObj.object1.type != "None"){
+            if(eventDataObj.object1.type != "None"  && !rootStateModel.flashlightIsScanning.get()){
                 console.debug(JSON.stringify(eventDataObj));
                 console.debug("sending flashlight");
                 noamLemma.speak( "flashlightTrigger" , eventDataObj );
