@@ -58,7 +58,7 @@ NetworkGraph {
         }
         Segment{ // Door to health
             segmentType: "Place"
-            segmentName: "Door"
+            segmentName: "Exit"
             isTarget: true
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 615; y1: 275.5; x2: 650; y2: 275.5; tag: "door"}
@@ -66,7 +66,7 @@ NetworkGraph {
         }
         Segment{ // Door to health near entrance
             segmentType: "Place"
-            segmentName: "Door"
+            segmentName: "Exit"
             isTarget: true
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 870; y1: 275.5; x2: 905; y2: 275.5; tag: "door"}
@@ -92,7 +92,10 @@ NetworkGraph {
             segmentName: "FrontDesk"
             isTarget: true
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 632; y1: 561; x2: 593; y2: 561; tag: "wall"}
+                ListElement{type: "linear"; x1: 656; y1: 561; x2: 593; y2: 561; tag: "wall"}
+                ListElement{type: "linear"; x1: 656; y1: 561; x2: 656; y2: 555; tag: "wall"}
+                ListElement{type: "linear"; x1: 593; y1: 561; x2: 593; y2: 555; tag: "wall"}
+                ListElement{type: "linear"; x1: 656; y1: 555; x2: 593; y2: 555; tag: "wall"}
             }
         }
 
@@ -117,7 +120,7 @@ NetworkGraph {
 
         Segment{ // Bathroom Door
             segmentType: "Place"
-            segmentName: "Door"
+            segmentName: "Exit"
             isTarget: true
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 285; y1: 463; x2: 285; y2: 500; tag: "door"}

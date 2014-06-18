@@ -69,7 +69,7 @@ Item {
         else eventDataObj.object1.magnitude = 1;
         eventDataObj.objectsLength = 1;
         if( eventDataObj.feedbackMode != "silent"){
-            if(eventDataObj.object1.type != "None"  && !rootStateModel.flashlightIsScanning.get()){
+            if(eventDataObj.object1.type != "None"  && (!rootStateModel.flashlightIsScanning.get() || eventDataObj.object1.name != "Wall")){
                 console.debug(JSON.stringify(eventDataObj));
                 console.debug("sending flashlight");
                 noamLemma.speak( "flashlightTrigger" , eventDataObj );
