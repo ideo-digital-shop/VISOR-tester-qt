@@ -118,7 +118,7 @@ Item {
     }
     SynchronizedVar{
         id: targetObjectSynch
-        initialValue: "none"
+        initialValue: "None"
         synchMessageName: "targetObjectSynch"
     }
     SynchronizedVar{

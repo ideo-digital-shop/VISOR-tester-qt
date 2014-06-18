@@ -60,14 +60,26 @@ Rectangle{
             }
             Button{
                 id: sendOverviewButton
-                width: 120
+                width: 100
                 height: 30
-                label: "Send Overview"
+                label: "Woz 1"
                 fillColor: "#0A2036"
                 textColor: "#DFDFDF"
                 animateClick: true
                 onClicked: {
-                    noamLemma.speak("wozOverview", true);
+                    noamLemma.speak("wozOverview1", true);
+                }
+            }
+            Button{
+                id: sendOverviewButton2
+                width: 100
+                height: 30
+                label: "Woz 2"
+                fillColor: "#0A2036"
+                textColor: "#DFDFDF"
+                animateClick: true
+                onClicked: {
+                    noamLemma.speak("wozOverview2", true);
                 }
             }
             Button{
@@ -403,7 +415,7 @@ Rectangle{
             Rectangle {
                 id: uiCluster
                 width: 320
-                height: 150
+                height: 230
                 color: "#68555555"
                 radius: 2
                 Button{
@@ -411,7 +423,7 @@ Rectangle{
                     width: 150
                     height: 30
                     anchors {left: parent.left; top: parent.top; leftMargin: 8; topMargin: 8}
-                    label: "Confirm Arrive"
+                    label: "Nav Arrive"
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
@@ -422,21 +434,32 @@ Rectangle{
                     width: 150
                     height: 30
                     anchors {left: confirmArrival.right; top: parent.top; leftMargin: 8; topMargin: 8}
-                    label: "Confirm Begin"
+                    label: "Nav Begin"
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
                     onClicked: noamLemma.speak("confirmRouteBegin" , rootStateModel.targetObject.get());
                 }
+                Button{
+                    id: bookmark
+                    width: 150
+                    height: 30
+                    anchors {left: confirmArrival.left; top: confirmBegin.bottom; leftMargin: 0; topMargin: 8}
+                    label: "Set Bookmark"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: noamLemma.speak("setBookmark" , rootStateModel.targetObject.get());
+                }
 
                 SelectorCluster{
                     id: confirmTarget
                     width: 320
-                    height: 50
+                    height: 120
                     labelText: "Target Object"
                     anchors {
                         left: parent.left
-                        top: confirmBegin.bottom
+                        top: bookmark.bottom
                     }
 
                     onSelectedSignal: {
@@ -446,37 +469,46 @@ Rectangle{
                         id: none
                         anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
                         label: "None"
-                        selectionParameter: "none"
+                        selectionParameter: "None"
                         width: 60
                         height: 30
-                        active: (rootStateModel.targetObject.get() === "none")
+                        active: (rootStateModel.targetObject.get() === "None")
                     }
                     SelectorButton{
                         id: desk
                         anchors {left: none.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
                         label: "Desk"
-                        selectionParameter: "desk"
+                        selectionParameter: "FrontDesk"
                         width: 60
                         height: 30
-                        active: (rootStateModel.targetObject.get() === "desk")
+                        active: (rootStateModel.targetObject.get() === "FrontDest")
                     }
                     SelectorButton{
                         id: table
                         anchors {left: desk.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
                         label: "Table"
-                        selectionParameter: "table"
+                        selectionParameter: "Table"
                         width: 70
                         height: 30
-                        active: (rootStateModel.targetObject.get() === "table")
+                        active: (rootStateModel.targetObject.get() === "Table")
                     }
                     SelectorButton{
                         id: restroom
                         anchors {left: table.right; top: parent.mainLabel.bottom; leftMargin: 8; topMargin:8}
                         label: "Restroom"
-                        selectionParameter: "restroom"
+                        selectionParameter: "Restroom"
                         width: 100
                         height: 30
-                        active: (rootStateModel.targetObject.get() === "restroom")
+                        active: (rootStateModel.targetObject.get() === "Restroom")
+                    }
+                    SelectorButton{
+                        id: kitchen
+                        anchors {left: none.left; top: none.bottom; leftMargin: 0; topMargin:8}
+                        label: "Kitchen"
+                        selectionParameter: "Kitchen"
+                        width: 100
+                        height: 30
+                        active: (rootStateModel.targetObject.get() === "Kitchen")
                     }
                 }
             }

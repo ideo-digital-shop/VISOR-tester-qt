@@ -40,7 +40,7 @@ Rectangle {
         heroModel: heroModel
         evaluation: mapEvaluation
         anchors.fill: parent
-        anchors.leftMargin: 20
+        anchors.leftMargin: -100
         anchors.topMargin: 20
         pixelsPerMeterScale:{
             var xppm = width/mapData.maxBoundPoint.x;

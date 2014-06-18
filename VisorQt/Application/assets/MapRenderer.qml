@@ -74,7 +74,18 @@ Rectangle {
             heroModel: root.heroModel
             pixelsPerMeterScale: root.pixelsPerMeterScale
         }
-
+                Repeater{
+                    id: segmentNames
+                    model: mapData.segments.children
+                    anchors.fill: parent
+                    Text{
+                        smooth:true; antialiasing: true
+                        color: mapData.segments.children[index].isTarget ? Qt.lighter("green") : Qt.lighter("red");
+                        text: mapData.segments.children[index].segmentName
+                        x: root.pixelsPerMeterScale*mapData.segments.children[index].minBoundPoint.x
+                        y: root.pixelsPerMeterScale*mapData.segments.children[index].minBoundPoint.y
+                    }
+                }
 //        Repeater{
 //            id: segmentProximities
 //            model: evaluation.proximityEvaluation.segmentEvalArray
