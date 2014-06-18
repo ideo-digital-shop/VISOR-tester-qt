@@ -99,17 +99,17 @@ Rectangle{
                     rootStateModel.repeatTime.set( targetSynch );
                 }
             }
-            ValueSlider{
-                id: beamAngleSlider
-                sliderWidth: 240
-                minValue: 0
-                maxValue: 360
-                initialValue: rootStateModel.beamAngle.initialValue;
-                labelText: "Beam Angle"
-                onCurrentValueChanged: {
-                    rootStateModel.beamAngle.set( targetSynch );
-                }
-            }
+//            ValueSlider{
+//                id: beamAngleSlider
+//                sliderWidth: 240
+//                minValue: 0
+//                maxValue: 360
+//                initialValue: rootStateModel.beamAngle.initialValue;
+//                labelText: "Beam Angle"
+//                onCurrentValueChanged: {
+//                    rootStateModel.beamAngle.set( targetSynch );
+//                }
+//            }
             ValueSlider{
                 id: distanceThresholdSlider
                 sliderWidth: 240
@@ -201,42 +201,42 @@ Rectangle{
 //                }
 //            }
 
-            SelectorCluster{
-                id: soundModeSelector
-                width: 320
-                height: 134
-                labelText: " Sound Mode"
-                onSelectedSignal: {
-                    rootStateModel.soundMode.set( selectionParameter );
-                }
-                SelectorButton{
-                    id: binaural
-                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Binaural"
-                    selectionParameter: "binaural"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.soundMode.get() == "binaural")
-                }
-                SelectorButton{
-                    id: stereo
-                    anchors {left: binaural.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Stereo"
-                    selectionParameter: "stereo"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.soundMode.get() == "stereo")
-                }
-                SelectorButton{
-                    id: mono
-                    anchors {left: stereo.left; top: stereo.bottom; topMargin:8}
-                    label: "Mono"
-                    selectionParameter: "mono"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.soundMode.get() == "mono")
-                }
-            }                                                
+//            SelectorCluster{
+//                id: soundModeSelector
+//                width: 320
+//                height: 134
+//                labelText: " Sound Mode"
+//                onSelectedSignal: {
+//                    rootStateModel.soundMode.set( selectionParameter );
+//                }
+//                SelectorButton{
+//                    id: binaural
+//                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+//                    label: "Binaural"
+//                    selectionParameter: "binaural"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.soundMode.get() == "binaural")
+//                }
+//                SelectorButton{
+//                    id: stereo
+//                    anchors {left: binaural.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+//                    label: "Stereo"
+//                    selectionParameter: "stereo"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.soundMode.get() == "stereo")
+//                }
+//                SelectorButton{
+//                    id: mono
+//                    anchors {left: stereo.left; top: stereo.bottom; topMargin:8}
+//                    label: "Mono"
+//                    selectionParameter: "mono"
+//                    width: 120
+//                    height: 30
+//                    active: (rootStateModel.soundMode.get() == "mono")
+//                }
+//            }
         }
 
         Column{

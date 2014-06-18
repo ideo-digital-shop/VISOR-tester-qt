@@ -22,27 +22,16 @@ Item {
         }
     }
 
-    onHalfButtonStateChanged: {
-        if(!connected)return;
-        if( rootStateModel.buttonFunctionMode.get() !== "off" ){
-            if(halfButtonState){
-                waitForFullPressTimer.start();
-            }
-            else{
-                waitForFullPressTimer.stop();
-            }
-        }
-    }
-
     onFullButtonStateChanged: {
-        if(!connected || !fullButtonState)return;
-        if( useMode !== "off" ){
-            waitForFullPressTimer.stop();
+        if(!connected || !fullButtonState){
+            console.debug("i am not the master of buttons.");
+            return;
+        }
+        if( useMode !== "off" ){            
             if( useMode === "flashlight"){
-                if( rootStateModel.flashlightIsScanning.get() ){
-                    rootStateModel.flashlightIsScanning.set( false );
-                }
-                else rootStateModel.flashlightIsScanning.set( true );
+                if( fullButtonState ){
+                    sendFlashlightEvent();
+                }                
             }
             else if(useMode === "overview"){
                 rootStateModel.flashlightIsScanning.set( false );
@@ -71,7 +60,7 @@ Item {
     }
 
     function sendFlashlightEvent(){
-        console.debug("sending flashlight")
+        console.debug("evaluating flashlight");
         var eventDataObj = new Object;
         eventDataObj.soundMode = rootStateModel.soundMode.get();
         eventDataObj.feedbackMode = rootStateModel.feedbackMode.get();
@@ -80,6 +69,7 @@ Item {
         if( eventDataObj.feedbackMode != "silent"){
             if(eventDataObj.object1.type != "None"){
                 console.debug(JSON.stringify(eventDataObj));
+                console.debug("sending flashlight");
                 noamLemma.speak( "flashlightTrigger" , eventDataObj );
             }
         }
