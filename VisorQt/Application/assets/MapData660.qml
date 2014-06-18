@@ -174,13 +174,13 @@ NetworkGraph {
 
         // Trash Cans
         Segment{
-            segmentName: "Trash"
+            segmentName: "Recycling"
             segmentType: "Thing"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 300; y1: 437; x2: 300; y2: 425; tag: "trash"}
-                ListElement{type: "linear"; x1: 300; y1: 425; x2: 365; y2: 425; tag: "trash"}
-                ListElement{type: "linear"; x1: 365; y1: 425; x2: 365; y2: 437; tag: "trash"}
-                ListElement{type: "linear"; x1: 365; y1: 437; x2: 300; y2: 437; tag: "trash"}
+                ListElement{type: "linear"; x1: 300; y1: 437; x2: 300; y2: 425; tag: "recycling"}
+                ListElement{type: "linear"; x1: 300; y1: 425; x2: 365; y2: 425; tag: "recycling"}
+                ListElement{type: "linear"; x1: 365; y1: 425; x2: 365; y2: 437; tag: "recycling"}
+                ListElement{type: "linear"; x1: 365; y1: 437; x2: 300; y2: 437; tag: "recycling"}
             }
         }
 
