@@ -14,6 +14,7 @@ Item {
     property alias flashlightScanMode: flashlightScanModeSynch
     property alias flashlightIsScanning: flashlightIsScanningSynch
     property alias headingSource: headingSourceSynch
+    property alias targetObject: targetObjectSynch
     property alias motorIntensity: motorIntensitySynch
     property alias motorDuration: motorDurationSynch
     property alias vibeMode: vibeModeSynch
@@ -114,6 +115,11 @@ Item {
         id: headingSourceSynch
         initialValue: "body"
         synchMessageName: "headingSourceSynch"
+    }
+    SynchronizedVar{
+        id: targetObjectSynch
+        initialValue: "none"
+        synchMessageName: "targetObjectSynch"
     }
     SynchronizedVar{
         id: motorIntensitySynch
