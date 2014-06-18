@@ -139,11 +139,9 @@ Item {
     }
 
     function nudgeLeft(){
-        noamLemma.speak("nudgeLeft", true);
         if( rootStateModel.vibeMode.get() ) leftMotor();
     }
     function nudgeRight(){
-        noamLemma.speak("nudgeRight", true);
         if( rootStateModel.vibeMode.get() ) rightMotor();
     }
     function turnLeft(){
@@ -153,6 +151,13 @@ Item {
     function turnRight(){
         noamLemma.speak("turnRight", true);
         if( rootStateModel.vibeMode.get() ) rightMotor();
+    }
+    function goForward(){
+        noamLemma.speak("forward", true);
+        if( rootStateModel.vibeMode.get() ) {
+            rightMotor();
+            leftMotor();
+        }
     }
 
     function leftMotor(){

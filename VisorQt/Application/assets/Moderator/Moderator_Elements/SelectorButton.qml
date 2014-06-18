@@ -6,9 +6,10 @@ Button {
 
     property int childIndex: -1
     property string selectionParameter: "wat"
+    property bool enabled: true
 
     onClicked: {
-        if(!active){
+        if(enabled && !active){
             active = true;
             selectedSignal( childIndex );
         }

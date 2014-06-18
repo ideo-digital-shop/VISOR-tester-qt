@@ -251,7 +251,7 @@ Rectangle{
                 height: 134
                 labelText: " Feedback Mode"
                 onSelectedSignal: {
-                    rootStateModel.feedbackMode.set( selectionParameter );
+                    // rootStateModel.feedbackMode.set( selectionParameter );
                 }
                 SelectorButton{
                     id: standing
@@ -264,6 +264,7 @@ Rectangle{
                 }
                 SelectorButton{
                     id: moving
+                    enabled: false
                     anchors {left: standing.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
                     label: "Moving"
                     selectionParameter: "moving"
@@ -275,6 +276,7 @@ Rectangle{
                     id: silent
                     anchors {left: moving.left; top: moving.bottom; topMargin:8}
                     label: "Silent"
+                    enabled: false
                     selectionParameter: "silent"
                     width: 120
                     height: 30
@@ -361,7 +363,7 @@ Rectangle{
             Rectangle {
                 id: turnCluster
                 width: 320
-                height: 46
+                height: 92
                 color: "#68555555"
                 radius: 2
                 Button{
@@ -385,6 +387,17 @@ Rectangle{
                     textColor: "#DFDFDF"
                     animateClick: true
                     onClicked: eventManager.turnRight();
+                }
+                Button{
+                    id: goForward
+                    width: 140
+                    height: 30
+                    anchors {left: parent.left; top: turnLeft.bottom; leftMargin: 8; topMargin: 8}
+                    label: "Forward"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: eventManager.goForward();
                 }
             }
             Rectangle {
