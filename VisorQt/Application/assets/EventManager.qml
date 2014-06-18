@@ -84,8 +84,8 @@ Item {
             }
         }
         if( eventDataObj.feedbackMode == "silent" || rootStateModel.vibeMode.get() ){
-            if( eventDataObj.object1.magnitude<30*12 && eventDataObj.object1.magnitude>0){
-                var motorIntensityInt = (eventDataObj.object1.magnitude/(30*12))*4095;
+            if( eventDataObj.object1.magnitude<10*12 && eventDataObj.object1.magnitude>0){
+                var motorIntensityInt = (1-eventDataObj.object1.magnitude/(10*12))*3095+1000;
                 rootStateModel.motorIntensity.set( parseInt(motorIntensityInt).toString());
                 leftMotor();
                 rightMotor();
