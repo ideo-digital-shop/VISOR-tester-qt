@@ -10,198 +10,73 @@ NetworkGraph {
     //xmax = 1184
     Item{
         id: segmentsObject
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 0; y1: 0; x2: 198; y2: 0; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 198; y1: 0; x2: 198; y2: 313; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 198; y1: 313; x2: 37.5; y2: 313; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 37.5; y1: 313; x2: 37.5; y2: 319; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 37.5; y1: 319; x2: 198; y2: 319; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 198; y1: 319; x2: 198; y2: 390.5; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 198; y1: 390.5; x2: 220; y2: 390.5; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall large
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 220; y1: 390.5; x2: 220; y2: 393.5; tag: "wall"}
-//            }
-//        }
-        Segment{ // wall large
+
+         // walls large
+        Segment{
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 220; y1: 393.5; x2: 226; y2: 393.5; tag: "wall"}
-            }
-        }
-        Segment{ // wall large
-            segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 226; y1: 393.5; x2: 226; y2: 390.5; tag: "wall"}
-            }
-        }
-        Segment{ // wall large
-            segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 226; y1: 390.5; x2: 232.5; y2: 390.5; tag: "wall"}
             }
         }
-        Segment{ // wall kitchenette
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 232.5; y1: 390.5; x2: 232.5; y2: 384; tag: "wall"}
-            }
-        }
-        Segment{ // wall kitchenette
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 232.5; y1: 384; x2: 228.5; y2: 384; tag: "wall"}
-            }
-        }
-        Segment{ // wall kitchenette
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 228.5; y1: 384; x2: 228.5; y2: 295; tag: "wall"}
-            }
-        }
-        Segment{ // wall kitchenette
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 228.5; y1: 295; x2: 232.5; y2: 295; tag: "wall"}
-            }
-        }
-        Segment{ // wall kitchenette
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 232.5; y1: 295; x2: 232.5; y2: 289; tag: "wall"}
-            }
-        }  
-        Segment{ // wall d-shop
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 232.5; y1: 289; x2: 204.5; y2: 289; tag: "wall"}
-            }
-        }
-        Segment{ // wall d-shop
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 204.5; y1: 289; x2: 204.5; y2: 0; tag: "wall"}
-            }
-        }
-        Segment{ // wall d-shop
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 204.5; y1: 0; x2: 584.5; y2: 0; tag: "wall"}
-            }
-        }
-        Segment{ // wall d-shop
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 584.5; y1: 0; x2: 584.5; y2: 275.5; tag: "wall"}
-            }
-        }
-        Segment{ // wall d-shop
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 584.5; y1: 275.5; x2: 614.5; y2: 275.5; tag: "wall"}
-            }
-        }
-        Segment{ // wall d-shop
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 614.5; y1: 275.5; x2: 614.5; y2: 270.5; tag: "wall"}
-            }
-        }
-//        Segment{ // wall health
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 614.5; y1: 270.5; x2: 590.5; y2: 270.5; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall health
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 590.5; y1: 270.5; x2: 590.5; y2: 0; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall health
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 590.5; y1: 0; x2: 1184.5; y2: 0; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall health
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 1184.5; y1: 0; x2: 1184.5; y2: 236.5; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall health
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 1184.5; y1: 236.5; x2: 1155.5; y2: 270.5; tag: "wall"}
-//            }
-//        }
-//        Segment{ // wall health
-//            segmentSections: ListModel{
-//                ListElement{type: "linear"; x1: 1155.5; y1: 270.5; x2: 941; y2: 270.5; tag: "wall"}
-//            }
-//        }
-        Segment{ // wall communal
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 941; y1: 270.5; x2: 941; y2: 275.5; tag: "wall"}
-            }
-        }
-        Segment{ // wall communal
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 941; y1: 275.5; x2: 1144.5; y2: 275.5; tag: "wall"}
-            }
-        }
-        Segment{ // wall communal
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 1144.5; y1: 275.5; x2: 1144.5; y2: 322; tag: "wall"}
-            }
-        }
-        Segment{ // wall communal
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 1144.5; y1: 393.5; x2: 1144.5; y2: 445; tag: "wall"}
-            }
-        }
-        Segment{ // wall communal
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 1144.5; y1: 445; x2: 1184.5; y2: 489; tag: "wall"}
-            }
-        }
-        Segment{ // wall communal
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 1184.5; y1: 489; x2: 1018; y2: 489; tag: "wall"}
-            }
-        }
-        Segment{ // wall communal
 
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 1018; y1: 489; x2: 1018; y2: 491; tag: "wall"}
-            }
-        }
-
-        // Communal Wall closing wall
+        // walls kitchenette
         Segment{
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 614.5; y1: 275.5; x2: 940; y2: 275.5; tag: "wall"}
+                ListElement{type: "linear"; x1: 232.5; y1: 390.5; x2: 232.5; y2: 384; tag: "wall"}
+                ListElement{type: "linear"; x1: 232.5; y1: 384; x2: 228.5; y2: 384; tag: "wall"}
+                ListElement{type: "linear"; x1: 228.5; y1: 384; x2: 228.5; y2: 295; tag: "wall"}
+                ListElement{type: "linear"; x1: 228.5; y1: 295; x2: 232.5; y2: 295; tag: "wall"}
+                ListElement{type: "linear"; x1: 232.5; y1: 295; x2: 232.5; y2: 289; tag: "wall"}
+
             }
         }
+
+        // wall d-shop
+        Segment{
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 232.5; y1: 289; x2: 204.5; y2: 289; tag: "wall"}
+                ListElement{type: "linear"; x1: 204.5; y1: 289; x2: 204.5; y2: 0; tag: "wall"}
+                ListElement{type: "linear"; x1: 204.5; y1: 0; x2: 584.5; y2: 0; tag: "wall"}
+                ListElement{type: "linear"; x1: 584.5; y1: 0; x2: 584.5; y2: 275.5; tag: "wall"}
+
+            }
+        }
+        Segment{ // wall communal
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 584.5; y1: 275.5; x2: 614.5; y2: 275.5; tag: "wall"}
+
+                ListElement{type: "linear"; x1: 941; y1: 275.5; x2: 1144.5; y2: 275.5; tag: "wall"}
+                ListElement{type: "linear"; x1: 1144.5; y1: 275.5; x2: 1144.5; y2: 322; tag: "wall"}
+                ListElement{type: "linear"; x1: 1144.5; y1: 393.5; x2: 1144.5; y2: 445; tag: "wall"}
+                ListElement{type: "linear"; x1: 1144.5; y1: 445; x2: 1184.5; y2: 489; tag: "wall"}
+                ListElement{type: "linear"; x1: 1184.5; y1: 489; x2: 1018; y2: 489; tag: "wall"}
+                ListElement{type: "linear"; x1: 1018; y1: 489; x2: 1018; y2: 491; tag: "wall"}
+                ListElement{type: "linear"; x1: 650; y1: 275.5; x2: 870; y2: 275.5; tag: "wall"}
+                ListElement{type: "linear"; x1: 905; y1: 275.5; x2: 940; y2: 275.5; tag: "wall"}
+            }
+        }
+        Segment{ // Door to health
+            segmentType: "Place"
+            segmentName: "Door"
+            isTarget: true
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 615; y1: 275.5; x2: 650; y2: 275.5; tag: "door"}
+            }
+        }
+        Segment{ // Door to health near entrance
+            segmentType: "Place"
+            segmentName: "Door"
+            isTarget: true
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 870; y1: 275.5; x2: 905; y2: 275.5; tag: "door"}
+            }
+        }
+
 
         Segment{ // meeting
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 1018; y1: 491; x2: 1184.5; y2: 491; tag: "wall"}
-            }
-        }
-
-        Segment{ // meeting
-            segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 1018; y1: 491; x2: 1018; y2: 562; tag: "wall"}
             }
         }
@@ -227,33 +102,25 @@ NetworkGraph {
             }
         }
 
-        Segment{ // Behind bathroom walls
+        // Bathroom walls
+        Segment{
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 378; y1: 562; x2: 378; y2: 439; tag: "wall"}
-            }
-        }
-
-        Segment{ // Behind bathroom walls
-            segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 378; y1: 562; x2: 378; y2: 439; tag: "wall"}
-            }
-        }
-
-        Segment{ // Top bathroom walls
-            segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 378; y1: 439; x2: 285; y2: 439; tag: "wall"}
-            }
-        }
-
-        Segment{ // Bathroom walls           
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 285; y1: 439; x2: 285; y2: 715; tag: "wall"}
-            }
-        }
-
-        Segment{ // Across from Bathroom walls
-            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 285; y1: 439; x2: 285; y2: 463; tag: "wall"}
+                // Door here
+                ListElement{type: "linear"; x1: 285; y1: 500; x2: 285; y2: 715; tag: "wall"}
                 ListElement{type: "linear"; x1: 225; y1: 430; x2: 225; y2: 715; tag: "wall"}
+            }
+        }
+
+        Segment{ // Bathroom Door
+            segmentType: "Place"
+            segmentName: "Door"
+            isTarget: true
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 285; y1: 463; x2: 285; y2: 500; tag: "door"}
             }
         }
 
@@ -305,6 +172,18 @@ NetworkGraph {
             }
         }
 
+        // Trash Cans
+        Segment{
+            segmentName: "Trash"
+            segmentType: "Thing"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 300; y1: 437; x2: 300; y2: 425; tag: "trash"}
+                ListElement{type: "linear"; x1: 300; y1: 425; x2: 365; y2: 425; tag: "trash"}
+                ListElement{type: "linear"; x1: 365; y1: 425; x2: 365; y2: 437; tag: "trash"}
+                ListElement{type: "linear"; x1: 365; y1: 437; x2: 300; y2: 437; tag: "trash"}
+            }
+        }
+
         // Phone Booths
         Segment{ // wall phone booth
             segmentSections: ListModel{
@@ -314,6 +193,50 @@ NetworkGraph {
                 ListElement{type: "linear"; x1: 1045; y1: 438; x2: 1045; y2: 328; tag: "phone booth"}
             }
 
+        }
+
+        // Big Main Table
+        Segment{
+            segmentName: "Table"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 485; y1: 385; x2: 485; y2: 445; tag: "table"}
+                ListElement{type: "linear"; x1: 485; y1: 445; x2: 630; y2: 445; tag: "table"}
+                ListElement{type: "linear"; x1: 630; y1: 445; x2: 630; y2: 385; tag: "table"}
+                ListElement{type: "linear"; x1: 630; y1: 385; x2: 485; y2: 385; tag: "table"}
+            }
+        }
+        // Single Big Main Table Chair
+        Segment{
+            segmentName: "Chair"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 605; y1: 370; x2: 605; y2: 385; tag: "chair"}
+                ListElement{type: "linear"; x1: 605; y1: 385; x2: 620; y2: 385; tag: "chair"}
+                ListElement{type: "linear"; x1: 620; y1: 385; x2: 620; y2: 370; tag: "chair"}
+                ListElement{type: "linear"; x1: 620; y1: 370; x2: 605; y2: 370; tag: "chair"}
+            }
+        }
+
+
+        // Small Main Table
+        Segment{
+            segmentName: "Table"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 700; y1: 385; x2: 700; y2: 445; tag: "table"}
+                ListElement{type: "linear"; x1: 700; y1: 445; x2: 785; y2: 445; tag: "table"}
+                ListElement{type: "linear"; x1: 785; y1: 445; x2: 785; y2: 385; tag: "table"}
+                ListElement{type: "linear"; x1: 785; y1: 385; x2: 700; y2: 385; tag: "table"}
+            }
+        }
+
+        // Stationary Whiteboard and Table Obstacles near kitchen
+        Segment{
+            segmentName: "Table"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 315; y1: 220; x2: 315; y2: 290; tag: "table"}
+                ListElement{type: "linear"; x1: 315; y1: 290; x2: 345; y2: 290; tag: "table"}
+                ListElement{type: "linear"; x1: 345; y1: 290; x2: 345; y2: 220; tag: "table"}
+                ListElement{type: "linear"; x1: 345; y1: 220; x2: 315; y2: 220; tag: "table"}
+            }
         }
 
         // Meeting Booth
@@ -357,43 +280,13 @@ NetworkGraph {
         Segment{
             segmentName: "Table"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 389; y1: 140; x2: 389; y2: 172; tag: "table"}
-                ListElement{type: "linear"; x1: 389; y1: 172; x2: 481; y2: 172; tag: "table"}
-                ListElement{type: "linear"; x1: 481; y1: 172; x2: 481; y2: 140; tag: "table"}
-                ListElement{type: "linear"; x1: 481; y1: 140; x2: 389; y2: 140; tag: "table"}
+                ListElement{type: "linear"; x1: 381; y1: 140; x2: 381; y2: 172; tag: "table"}
+                ListElement{type: "linear"; x1: 381; y1: 172; x2: 451; y2: 172; tag: "table"}
+                ListElement{type: "linear"; x1: 451; y1: 172; x2: 451; y2: 140; tag: "table"}
+                ListElement{type: "linear"; x1: 451; y1: 140; x2: 381; y2: 140; tag: "table"}
             }
         }
-        // Chair
-        Segment{
-            segmentName: "Chair"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 400; y1: 119; x2: 400; y2: 135; tag: "chair"}
-                ListElement{type: "linear"; x1: 400; y1: 135; x2: 416; y2: 135; tag: "chair"}
-                ListElement{type: "linear"; x1: 416; y1: 135; x2: 416; y2: 119; tag: "chair"}
-                ListElement{type: "linear"; x1: 416; y1: 119; x2: 400; y2: 119; tag: "chair"}
-            }
-        }
-        // Chair
-        Segment{
-            segmentName: "Chair"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 450; y1: 119; x2: 450; y2: 135; tag: "chair"}
-                ListElement{type: "linear"; x1: 450; y1: 135; x2: 466; y2: 135; tag: "chair"}
-                ListElement{type: "linear"; x1: 466; y1: 135; x2: 466; y2: 119; tag: "chair"}
-                ListElement{type: "linear"; x1: 466; y1: 119; x2: 450; y2: 119; tag: "chair"}
-            }
-        }
-        // Chair
-        Segment{
-            segmentName: "Chair"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 450; y1: 177; x2: 450; y2: 193; tag: "chair"}
-                ListElement{type: "linear"; x1: 450; y1: 193; x2: 466; y2: 193; tag: "chair"}
-                ListElement{type: "linear"; x1: 466; y1: 193; x2: 466; y2: 177; tag: "chair"}
-                ListElement{type: "linear"; x1: 466; y1: 177; x2: 450; y2: 177; tag: "chair"}
-            }
-        }
-        // Chair
+        // Chair - bottom
         Segment{
             segmentName: "Chair"
             segmentSections: ListModel{
@@ -403,73 +296,14 @@ NetworkGraph {
                 ListElement{type: "linear"; x1: 416; y1: 177; x2: 400; y2: 177; tag: "chair"}
             }
         }
-
-
-        // 'Circular' Tables 1
-        Segment{
-            segmentName: "Table"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 482; y1: 392; x2: 522; y2: 392; tag: "table"}
-                ListElement{type: "linear"; x1: 522; y1: 392; x2: 522; y2: 432; tag: "table"}
-                ListElement{type: "linear"; x1: 522; y1: 432; x2: 482; y2: 432; tag: "table"}
-                ListElement{type: "linear"; x1: 482; y1: 432; x2: 482; y2: 392; tag: "table"}
-            }
-        }
-        // Chair
+        // Chair - left
         Segment{
             segmentName: "Chair"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 495; y1: 390; x2: 510; y2: 390; tag: "chair"}
-                ListElement{type: "linear"; x1: 510; y1: 390; x2: 510; y2: 375; tag: "chair"}
-                ListElement{type: "linear"; x1: 510; y1: 375; x2: 495; y2: 375; tag: "chair"}
-                ListElement{type: "linear"; x1: 495; y1: 375; x2: 495; y2: 390; tag: "chair"}
-            }
-        }
-
-        // 'Circular' Tables 2
-        Segment{
-            isTarget: true
-            segmentName: "Table"
-            segmentType: "Thing"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 582; y1: 392; x2: 622; y2: 392; tag: "table"}
-                ListElement{type: "linear"; x1: 622; y1: 392; x2: 622; y2: 432; tag: "table"}
-                ListElement{type: "linear"; x1: 622; y1: 432; x2: 582; y2: 432; tag: "table"}
-                ListElement{type: "linear"; x1: 582; y1: 432; x2: 582; y2: 392; tag: "table"}
-            }
-        }
-        // Chair
-        Segment{
-            segmentName: "Chair"
-            segmentType: "Thing"
-            isTarget: true
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 595; y1: 390; x2: 610; y2: 390; tag: "chair"}
-                ListElement{type: "linear"; x1: 610; y1: 390; x2: 610; y2: 375; tag: "chair"}
-                ListElement{type: "linear"; x1: 610; y1: 375; x2: 595; y2: 375; tag: "chair"}
-                ListElement{type: "linear"; x1: 595; y1: 375; x2: 595; y2: 390; tag: "chair"}
-            }
-        }
-
-        // 'Circular' Tables 3
-        Segment{
-            segmentName: "Table"
-            id: circularTable3
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 682; y1: 392; x2: 722; y2: 392; tag: "table"}
-                ListElement{type: "linear"; x1: 722; y1: 392; x2: 722; y2: 432; tag: "table"}
-                ListElement{type: "linear"; x1: 722; y1: 432; x2: 682; y2: 432; tag: "table"}
-                ListElement{type: "linear"; x1: 682; y1: 432; x2: 682; y2: 392; tag: "table"}
-            }
-        }
-        // Chair
-        Segment{
-            segmentName: "Chair"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 695; y1: 390; x2: 710; y2: 390; tag: "chair"}
-                ListElement{type: "linear"; x1: 710; y1: 390; x2: 710; y2: 375; tag: "chair"}
-                ListElement{type: "linear"; x1: 710; y1: 375; x2: 695; y2: 375; tag: "chair"}
-                ListElement{type: "linear"; x1: 695; y1: 375; x2: 695; y2: 390; tag: "chair"}
+                ListElement{type: "linear"; x1: 381; y1: 145; x2: 381; y2: 161; tag: "chair"}
+                ListElement{type: "linear"; x1: 381; y1: 161; x2: 365; y2: 161; tag: "chair"}
+                ListElement{type: "linear"; x1: 365; y1: 161; x2: 365; y2: 145; tag: "chair"}
+                ListElement{type: "linear"; x1: 365; y1: 145; x2: 381; y2: 145; tag: "chair"}
             }
         }
 
@@ -478,10 +312,10 @@ NetworkGraph {
         Segment{
             segmentName: "Table"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 560; y1: 260; x2: 560; y2: 290; tag: "table"}
-                ListElement{type: "linear"; x1: 560; y1: 290; x2: 530; y2: 290; tag: "table"}
-                ListElement{type: "linear"; x1: 530; y1: 290; x2: 530; y2: 260; tag: "table"}
-                ListElement{type: "linear"; x1: 530; y1: 260; x2: 560; y2: 260; tag: "table"}
+                ListElement{type: "linear"; x1: 560; y1: 245; x2: 560; y2: 275; tag: "table"}
+                ListElement{type: "linear"; x1: 560; y1: 275; x2: 530; y2: 275; tag: "table"}
+                ListElement{type: "linear"; x1: 530; y1: 275; x2: 530; y2: 245; tag: "table"}
+                ListElement{type: "linear"; x1: 530; y1: 245; x2: 560; y2: 245; tag: "table"}
             }
         }
 
