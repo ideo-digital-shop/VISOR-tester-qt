@@ -177,13 +177,23 @@ NetworkGraph {
             segmentName: "Recycling"
             segmentType: "Thing"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 300; y1: 437; x2: 300; y2: 425; tag: "recycling"}
-                ListElement{type: "linear"; x1: 300; y1: 425; x2: 365; y2: 425; tag: "recycling"}
-                ListElement{type: "linear"; x1: 365; y1: 425; x2: 365; y2: 437; tag: "recycling"}
-                ListElement{type: "linear"; x1: 365; y1: 437; x2: 300; y2: 437; tag: "recycling"}
+                ListElement{type: "linear"; x1: 230; y1: 367; x2: 230; y2: 325; tag: "recycling"}
+                ListElement{type: "linear"; x1: 230; y1: 325; x2: 250; y2: 325; tag: "recycling"}
+                ListElement{type: "linear"; x1: 250; y1: 325; x2: 250; y2: 367; tag: "recycling"}
+                ListElement{type: "linear"; x1: 250; y1: 367; x2: 230; y2: 367; tag: "recycling"}
             }
         }
 
+        // Phone Booths
+        Segment{ // wall phone booth
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 1045; y1: 328; x2: 991; y2: 328; tag: "phone booth"}
+                ListElement{type: "linear"; x1: 991; y1: 328; x2: 991; y2: 438; tag: "phone booth"}
+                ListElement{type: "linear"; x1: 991; y1: 438; x2: 1045; y2: 438; tag: "phone booth"}
+                ListElement{type: "linear"; x1: 1045; y1: 438; x2: 1045; y2: 328; tag: "phone booth"}
+            }
+
+        }
         // Phone Booths
         Segment{ // wall phone booth
             segmentSections: ListModel{
@@ -241,21 +251,32 @@ NetworkGraph {
 
         // Meeting Booth
         Segment{
-            segmentName: "PhoneBooth"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 291; y1: 66; x2: 291; y2: 0; tag: "table"}
+                ListElement{type: "linear"; x1: 291; y1: 0; x2: 379; y2: 0; tag: "table"}
+                ListElement{type: "linear"; x1: 379; y1: 0; x2: 379; y2: 66; tag: "table"}
+                ListElement{type: "linear"; x1: 379; y1: 66; x2: 291; y2: 66; tag: "table"}
+            }
+        }
+        // Meeting Booth
+        Segment{
+            segmentName: "ReadingTable"
             segmentType: "Thing"
             isTarget: true
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 291; y1: 66; x2: 291; y2: 0; tag: "meeting booth"}
-                ListElement{type: "linear"; x1: 291; y1: 0; x2: 379; y2: 0; tag: "meeting booth"}
-                ListElement{type: "linear"; x1: 379; y1: 0; x2: 379; y2: 66; tag: "meeting booth"}
-                ListElement{type: "linear"; x1: 379; y1: 66; x2: 291; y2: 66; tag: "meeting booth"}
+                ListElement{type: "linear"; x1: 211; y1: 66; x2: 211; y2: 0; tag: "reading table"}
+                ListElement{type: "linear"; x1: 211; y1: 0; x2: 291; y2: 0; tag: "reading table"}
+                ListElement{type: "linear"; x1: 291; y1: 0; x2: 291; y2: 66; tag: "reading table"}
+                ListElement{type: "linear"; x1: 291; y1: 66; x2: 211; y2: 66; tag: "reading table"}
             }
         }
 
 
         // D Shop EE Table
         Segment{
-            segmentName: "Table"
+            segmentType: "Thing"
+            segmentName: "FrontDesk"
+            isTarget: true
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 484; y1: 100; x2: 584; y2: 100; tag: "table"}
                 ListElement{type: "linear"; x1: 584; y1: 100; x2: 584; y2: 0; tag: "table"}
@@ -340,9 +361,6 @@ NetworkGraph {
 
         // Tall 'Circular' Tables
         Segment{
-            segmentType: "Thing"
-            segmentName: "FrontDesk"
-            isTarget: true
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 580; y1: 145; x2: 580; y2: 175; tag: "table"}
                 ListElement{type: "linear"; x1: 580; y1: 175; x2: 550; y2: 175; tag: "table"}

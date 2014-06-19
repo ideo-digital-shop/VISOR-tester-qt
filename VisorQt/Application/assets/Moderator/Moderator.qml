@@ -538,6 +538,15 @@ Rectangle{
                         height: 30
                         active: (rootStateModel.targetObject.get() === "Kitchen")
                     }
+                    SelectorButton{
+                        id: readingTable
+                        anchors {left: kitchen.right; top: none.bottom; leftMargin: 0; topMargin:8}
+                        label: "Reading Table"
+                        selectionParameter: "ReadingTable"
+                        width: 100
+                        height: 30
+                        active: (rootStateModel.targetObject.get() === "ReadingTable")
+                    }
                 }
             }
             Button{
@@ -915,6 +924,18 @@ Rectangle{
             }
             else if( event.key === Qt.Key_Left){
                 rootStateModel.heroOrientationOffset.set( rootStateModel.heroOrientationOffset.get()-2 );
+            }
+            else if( event.key === Qt.Key_W){
+                nudgeLeft.clickSim();
+            }
+            else if( event.key === Qt.Key_E){
+                nudgeRight.clickSim();
+            }
+            else if( event.key === Qt.Key_S){
+                turnLeft.clickSim();
+            }
+            else if( event.key === Qt.Key_D){
+                turnRight.clickSim();
             }
         }
     }

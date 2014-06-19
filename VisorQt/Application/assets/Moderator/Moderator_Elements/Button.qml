@@ -18,6 +18,11 @@ Rectangle{id: root
 
     signal clicked
 
+    function clickSim(){
+        console.debug("blarg")
+        clicked();
+    }
+
     Component.onCompleted: mouseArea.onPressed.connect(clicked);
 
     color: fillColor
