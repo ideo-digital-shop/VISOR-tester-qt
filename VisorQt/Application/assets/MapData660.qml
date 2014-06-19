@@ -88,9 +88,6 @@ NetworkGraph {
         }
 
         Segment{ // 6A Office Door
-            segmentType: "Thing"
-            segmentName: "FrontDesk"
-            isTarget: true
             segmentSections: ListModel{
                 ListElement{type: "linear"; x1: 656; y1: 561; x2: 593; y2: 561; tag: "wall"}
                 ListElement{type: "linear"; x1: 656; y1: 561; x2: 656; y2: 555; tag: "wall"}
@@ -283,20 +280,10 @@ NetworkGraph {
         Segment{
             segmentName: "Table"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 381; y1: 140; x2: 381; y2: 172; tag: "table"}
-                ListElement{type: "linear"; x1: 381; y1: 172; x2: 451; y2: 172; tag: "table"}
-                ListElement{type: "linear"; x1: 451; y1: 172; x2: 451; y2: 140; tag: "table"}
-                ListElement{type: "linear"; x1: 451; y1: 140; x2: 381; y2: 140; tag: "table"}
-            }
-        }
-        // Chair - bottom
-        Segment{
-            segmentName: "Chair"
-            segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 400; y1: 177; x2: 400; y2: 193; tag: "chair"}
-                ListElement{type: "linear"; x1: 400; y1: 193; x2: 416; y2: 193; tag: "chair"}
-                ListElement{type: "linear"; x1: 416; y1: 193; x2: 416; y2: 177; tag: "chair"}
-                ListElement{type: "linear"; x1: 416; y1: 177; x2: 400; y2: 177; tag: "chair"}
+                ListElement{type: "linear"; x1: 291; y1: 140; x2: 291; y2: 172; tag: "table"}
+                ListElement{type: "linear"; x1: 291; y1: 172; x2: 379; y2: 172; tag: "table"}
+                ListElement{type: "linear"; x1: 379; y1: 172; x2: 379; y2: 140; tag: "table"}
+                ListElement{type: "linear"; x1: 379; y1: 140; x2: 291; y2: 140; tag: "table"}
             }
         }
         // Chair - left
@@ -310,15 +297,57 @@ NetworkGraph {
             }
         }
 
-
-        // Tall 'Circular' Tables
+        // D-shop center Table obstacle
         Segment{
             segmentName: "Table"
             segmentSections: ListModel{
-                ListElement{type: "linear"; x1: 560; y1: 245; x2: 560; y2: 275; tag: "table"}
-                ListElement{type: "linear"; x1: 560; y1: 275; x2: 530; y2: 275; tag: "table"}
-                ListElement{type: "linear"; x1: 530; y1: 275; x2: 530; y2: 245; tag: "table"}
-                ListElement{type: "linear"; x1: 530; y1: 245; x2: 560; y2: 245; tag: "table"}
+                ListElement{type: "linear"; x1: 419; y1: 100; x2: 419; y2: 135; tag: "table"}
+                ListElement{type: "linear"; x1: 419; y1: 135; x2: 454; y2: 135; tag: "table"}
+                ListElement{type: "linear"; x1: 454; y1: 135; x2: 454; y2: 100; tag: "table"}
+                ListElement{type: "linear"; x1: 454; y1: 100; x2: 419; y2: 100; tag: "table"}
+            }
+        }
+
+        // D-shop center Table obstacle
+        Segment{
+            segmentName: "Table"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 419; y1: 172; x2: 419; y2: 207; tag: "table"}
+                ListElement{type: "linear"; x1: 419; y1: 207; x2: 454; y2: 207; tag: "table"}
+                ListElement{type: "linear"; x1: 454; y1: 207; x2: 454; y2: 172; tag: "table"}
+                ListElement{type: "linear"; x1: 454; y1: 172; x2: 419; y2: 172; tag: "table"}
+            }
+        }
+        Segment{
+            segmentName: "Chair"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 444; y1: 207; x2: 444; y2: 222; tag: "chair"}
+                ListElement{type: "linear"; x1: 444; y1: 222; x2: 429; y2: 222; tag: "chair"}
+                ListElement{type: "linear"; x1: 429; y1: 222; x2: 429; y2: 207; tag: "chair"}
+                ListElement{type: "linear"; x1: 429; y1: 207; x2: 444; y2: 207; tag: "chair"}
+            }
+        }
+        Segment{
+            segmentName: "Chair"
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 469; y1: 182; x2: 469; y2: 197; tag: "chair"}
+                ListElement{type: "linear"; x1: 469; y1: 197; x2: 454; y2: 197; tag: "chair"}
+                ListElement{type: "linear"; x1: 454; y1: 197; x2: 454; y2: 182; tag: "chair"}
+                ListElement{type: "linear"; x1: 454; y1: 182; x2: 469; y2: 182; tag: "chair"}
+            }
+        }
+
+
+        // Tall 'Circular' Tables
+        Segment{
+            segmentType: "Thing"
+            segmentName: "FrontDesk"
+            isTarget: true
+            segmentSections: ListModel{
+                ListElement{type: "linear"; x1: 580; y1: 145; x2: 580; y2: 175; tag: "table"}
+                ListElement{type: "linear"; x1: 580; y1: 175; x2: 550; y2: 175; tag: "table"}
+                ListElement{type: "linear"; x1: 550; y1: 175; x2: 550; y2: 145; tag: "table"}
+                ListElement{type: "linear"; x1: 550; y1: 145; x2: 580; y2: 145; tag: "table"}
             }
         }
 
