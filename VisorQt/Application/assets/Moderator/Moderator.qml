@@ -509,7 +509,7 @@ Rectangle{
                         selectionParameter: "FrontDesk"
                         width: 60
                         height: 30
-                        active: (rootStateModel.targetObject.get() === "FrontDest")
+                        active: (rootStateModel.targetObject.get() === "FrontDesk")
                     }
                     SelectorButton{
                         id: table
