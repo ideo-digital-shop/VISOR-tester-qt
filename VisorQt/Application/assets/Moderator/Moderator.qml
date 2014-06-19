@@ -59,27 +59,44 @@ Rectangle{
                 }
             }
             Button{
-                id: sendOverviewButton
-                width: 100
+                id: dynamicOverview
+                width: 160
                 height: 30
-                label: "Woz 1"
+                label: "Send Overview"
                 fillColor: "#0A2036"
                 textColor: "#DFDFDF"
                 animateClick: true
                 onClicked: {
-                    noamLemma.speak("wozOverview1", true);
+                    eventManager.sendOverviewEvent();
                 }
             }
-            Button{
-                id: sendOverviewButton2
-                width: 100
-                height: 30
-                label: "Woz 2"
-                fillColor: "#0A2036"
-                textColor: "#DFDFDF"
-                animateClick: true
-                onClicked: {
-                    noamLemma.speak("wozOverview2", true);
+            Item{
+                height: childrenRect.height
+                width: childrenRect.width
+                Button{
+                    id: sendOverviewButton1
+                    width: 100
+                    height: 30
+                    label: "Woz 1"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: {
+                        noamLemma.speak("wozOverview1", true);
+                    }
+                }
+                Button{
+                    id: sendOverviewButton2
+                    anchors{ left: sendOverviewButton1.right; leftMargin: 8}
+                    width: 100
+                    height: 30
+                    label: "Woz 2"
+                    fillColor: "#0A2036"
+                    textColor: "#DFDFDF"
+                    animateClick: true
+                    onClicked: {
+                        noamLemma.speak("wozOverview2", true);
+                    }
                 }
             }
             Button{
@@ -111,17 +128,28 @@ Rectangle{
                     rootStateModel.repeatTime.set( targetSynch );
                 }
             }
-//            ValueSlider{
-//                id: beamAngleSlider
-//                sliderWidth: 240
-//                minValue: 0
-//                maxValue: 360
-//                initialValue: rootStateModel.beamAngle.initialValue;
-//                labelText: "Beam Angle"
-//                onCurrentValueChanged: {
-//                    rootStateModel.beamAngle.set( targetSynch );
-//                }
-//            }
+            ValueSlider{
+                id: overviewTimeSlider
+                sliderWidth: 240
+                minValue: .15
+                maxValue: 5
+                initialValue: rootStateModel.overviewTime.initialValue;
+                labelText: "Overview Time"
+                onCurrentValueChanged: {
+                    rootStateModel.overviewTime.set( targetSynch );
+                }
+            }
+            ValueSlider{
+                id: beamAngleSlider
+                sliderWidth: 240
+                minValue: 0
+                maxValue: 360
+                initialValue: rootStateModel.beamAngle.initialValue;
+                labelText: "Beam Angle"
+                onCurrentValueChanged: {
+                    rootStateModel.beamAngle.set( targetSynch );
+                }
+            }
             ValueSlider{
                 id: distanceThresholdSlider
                 sliderWidth: 240
@@ -185,70 +213,70 @@ Rectangle{
                     active: (rootStateModel.flashlightScanMode.get() === "new")
                 }
             }
-//            SelectorCluster{
-//                id: useModeSelector
-//                width: 320
-//                height: 94
-//                labelText: "Use Mode"
-//                onSelectedSignal: {
-//                    rootStateModel.useMode.set( selectionParameter );
-//                }
-//                SelectorButton{
-//                    id: flashlight
-//                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-//                    label: "Flashlight"
-//                    selectionParameter: "flashlight"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.useMode.get() === "flashlight")
-//                }
-//                SelectorButton{
-//                    id: overview
-//                    anchors {left: flashlight.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-//                    label: "Overview"
-//                    selectionParameter: "overview"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.useMode.get() === "overview")
-//                }
-//            }
+            //            SelectorCluster{
+            //                id: useModeSelector
+            //                width: 320
+            //                height: 94
+            //                labelText: "Use Mode"
+            //                onSelectedSignal: {
+            //                    rootStateModel.useMode.set( selectionParameter );
+            //                }
+            //                SelectorButton{
+            //                    id: flashlight
+            //                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+            //                    label: "Flashlight"
+            //                    selectionParameter: "flashlight"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.useMode.get() === "flashlight")
+            //                }
+            //                SelectorButton{
+            //                    id: overview
+            //                    anchors {left: flashlight.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+            //                    label: "Overview"
+            //                    selectionParameter: "overview"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.useMode.get() === "overview")
+            //                }
+            //            }
 
-//            SelectorCluster{
-//                id: soundModeSelector
-//                width: 320
-//                height: 134
-//                labelText: " Sound Mode"
-//                onSelectedSignal: {
-//                    rootStateModel.soundMode.set( selectionParameter );
-//                }
-//                SelectorButton{
-//                    id: binaural
-//                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-//                    label: "Binaural"
-//                    selectionParameter: "binaural"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.soundMode.get() == "binaural")
-//                }
-//                SelectorButton{
-//                    id: stereo
-//                    anchors {left: binaural.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-//                    label: "Stereo"
-//                    selectionParameter: "stereo"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.soundMode.get() == "stereo")
-//                }
-//                SelectorButton{
-//                    id: mono
-//                    anchors {left: stereo.left; top: stereo.bottom; topMargin:8}
-//                    label: "Mono"
-//                    selectionParameter: "mono"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.soundMode.get() == "mono")
-//                }
-//            }
+            //            SelectorCluster{
+            //                id: soundModeSelector
+            //                width: 320
+            //                height: 134
+            //                labelText: " Sound Mode"
+            //                onSelectedSignal: {
+            //                    rootStateModel.soundMode.set( selectionParameter );
+            //                }
+            //                SelectorButton{
+            //                    id: binaural
+            //                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+            //                    label: "Binaural"
+            //                    selectionParameter: "binaural"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.soundMode.get() == "binaural")
+            //                }
+            //                SelectorButton{
+            //                    id: stereo
+            //                    anchors {left: binaural.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+            //                    label: "Stereo"
+            //                    selectionParameter: "stereo"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.soundMode.get() == "stereo")
+            //                }
+            //                SelectorButton{
+            //                    id: mono
+            //                    anchors {left: stereo.left; top: stereo.bottom; topMargin:8}
+            //                    label: "Mono"
+            //                    selectionParameter: "mono"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.soundMode.get() == "mono")
+            //                }
+            //            }
         }
 
         Column{
@@ -257,44 +285,44 @@ Rectangle{
             spacing: 20
             height: container.height
             anchors {left: columnA.right; leftMargin: 20}
-//            SelectorCluster{
-//                id: feedbackModeSelector
-//                width: 320
-//                height: 134
-//                labelText: " Feedback Mode"
-//                onSelectedSignal: {
-//                    // rootStateModel.feedbackMode.set( selectionParameter );
-//                }
-//                SelectorButton{
-//                    id: standing
-//                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-//                    label: "Standing"
-//                    selectionParameter: "standing"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.feedbackMode.get() === "standing")
-//                }
-//                SelectorButton{
-//                    id: moving
-//                    enabled: false
-//                    anchors {left: standing.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-//                    label: "Moving"
-//                    selectionParameter: "moving"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.feedbackMode.get() === "moving")
-//                }
-//                SelectorButton{
-//                    id: silent
-//                    anchors {left: moving.left; top: moving.bottom; topMargin:8}
-//                    label: "Silent"
-//                    enabled: false
-//                    selectionParameter: "silent"
-//                    width: 120
-//                    height: 30
-//                    active: (rootStateModel.feedbackMode.get() === "silent")
-//                }
-//            }
+            //            SelectorCluster{
+            //                id: feedbackModeSelector
+            //                width: 320
+            //                height: 134
+            //                labelText: " Feedback Mode"
+            //                onSelectedSignal: {
+            //                    // rootStateModel.feedbackMode.set( selectionParameter );
+            //                }
+            //                SelectorButton{
+            //                    id: standing
+            //                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+            //                    label: "Standing"
+            //                    selectionParameter: "standing"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.feedbackMode.get() === "standing")
+            //                }
+            //                SelectorButton{
+            //                    id: moving
+            //                    enabled: false
+            //                    anchors {left: standing.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
+            //                    label: "Moving"
+            //                    selectionParameter: "moving"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.feedbackMode.get() === "moving")
+            //                }
+            //                SelectorButton{
+            //                    id: silent
+            //                    anchors {left: moving.left; top: moving.bottom; topMargin:8}
+            //                    label: "Silent"
+            //                    enabled: false
+            //                    selectionParameter: "silent"
+            //                    width: 120
+            //                    height: 30
+            //                    active: (rootStateModel.feedbackMode.get() === "silent")
+            //                }
+            //            }
             SelectorCluster{
                 id: imuSelector
                 width: 320
@@ -535,7 +563,7 @@ Rectangle{
                     label: "B1"
                     radius: 0
                     border.color: "cyan"
-                    active: rootStateModel.buttonEnabled.get() ? rootStateModel.halfButtonState : false
+                    active: rootStateModel.halfButtonState
                     MouseArea{anchors.fill:parent} //deactivate control
                 }
                 Button{
@@ -546,8 +574,48 @@ Rectangle{
                     label: "B2"
                     radius: 0
                     border.color: "cyan"
-                    active: rootStateModel.buttonEnabled.get() ? rootStateModel.fullButtonState : false
+                    active: rootStateModel.fullButtonState
                     MouseArea{anchors.fill:parent} //deactivate control
+                }
+            }
+            Item{
+                width: childrenRect.width
+                height: childrenRect.height
+                Button{
+                    id: caneButton
+                    x:8
+                    width: 200
+                    height: 30
+                    label: active ? "Cane Running" : "Cane Stopped"
+                    active: rootStateModel.caneRunning.get();
+                    onClicked: rootStateModel.caneRunning.set(!rootStateModel.caneRunning.get());
+                }
+                Rectangle{
+                    id: ind
+                    width:30
+                    height:30
+                    anchors{ left: caneButton.right; leftMargin: 8}
+                    color:"#00FFFFFF"
+                    border{color:"cyan";width:1}
+                    SequentialAnimation{
+                        id: caneAnim
+                        ColorAnimation{target: ind; property: "color"; to:"#FFFFFF"; duration: 50}
+                        ColorAnimation{target: ind; property: "color"; to:"#00FFFFFF"; duration: 50}
+                    }
+                    Component.onCompleted:{
+                        rootCaneSignal.connect(caneAnim.start);
+                    }
+                }
+            }
+            ValueSlider{
+                id: canePeriodSlider
+                sliderWidth: 240
+                minValue: .1
+                maxValue: 5
+                initialValue: rootStateModel.caneTime.initialValue;
+                labelText: "Cane Period"
+                onCurrentValueChanged: {
+                    rootStateModel.caneTime.set(targetSynch);
                 }
             }
         }

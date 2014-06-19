@@ -32,6 +32,7 @@ Rectangle {
     property string recMessage: ""
 
     signal sendFlashSignal()
+    signal rootCaneSignal()
 
     function connectEventManager(){
         sendFlashSignal.connect( eventManager.sendFlashlightEvent );

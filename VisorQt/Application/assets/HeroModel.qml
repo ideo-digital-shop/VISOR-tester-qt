@@ -7,7 +7,7 @@ Item {
     property real heroOrientation: ( bulkOrientation + orientationOffset ) % 360
     property real bulkOrientation: 0
     property real orientationOffset: rootStateModel.heroOrientationOffset.get()
-    property real heroHead: heroOrientation - 180
+    property real heroHeading: heroOrientation - 180
 
     function setPosition( posPoint ){
         heroPositionMeters.x = posPoint.x;

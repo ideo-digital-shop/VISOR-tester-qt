@@ -27,11 +27,11 @@ Item {
             console.debug("i am not the master of buttons.");
             return;
         }
-        if( useMode !== "off" ){            
+        if( useMode !== "off" ){
             if( useMode === "flashlight"){
                 if( fullButtonState ){
                     sendFlashlightEvent();
-                }                
+                }
             }
             else if(useMode === "overview"){
                 rootStateModel.flashlightIsScanning.set( false );
@@ -47,16 +47,6 @@ Item {
 
     function disconnect(){
         connected = false;
-    }
-
-    function sendOrientationEvent(){
-        if( rootStateModel.useMode.get() === "flashlight" ){
-            sendFlashlightEvent();
-        }
-        else if( rootStateModel.useMode.get() === "overview" ){
-            sendOverviewEvent();
-        }
-        else console.warn("invalid use mode");
     }
 
     function sendFlashlightEvent(){
@@ -109,25 +99,70 @@ Item {
     }
 
     function sendOverviewEvent(){
-        console.debug("sending overview")
-        var eventDataObj = new Object;
-        eventDataObj.soundMode = rootStateModel.soundMode.get();
-        eventDataObj.feedbackMode = rootStateModel.feedbackMode.get();
-        eventDataObj.object1 = buildOverviewObject();
-        eventDataObj.objectsLength = 1;
-        console.debug(JSON.stringify(eventDataObj));
+        console.debug("eval overview")
+        var eventDataObj = new Array;
+        eventDataObj = buildOverviewObjectList();
+        console.debug("overview list: " + JSON.stringify(eventDataObj));
         if( eventDataObj.feedbackMode != "silent" ){
-            noamLemma.speak( "flashlightTrigger" , eventDataObj );
+            overviewSendTimer.sendOverviewMessages( eventDataObj );
         }
         if( eventDataObj.feedbackMode == "silent" || rootStateModel.vibeMode.get() ){
-            leftMotor();
-            rightMotor();
+            //            leftMotor();
+            //            rightMotor();
         }
     }
 
     function buildOverviewObjectList(){
         var objectList = new Array;
-        var curElement = new Object;
+        for( var i=0; i<evaluation.proximityEvaluation.segmentEvalArray.length; i++ ){
+            var currentError = evaluation.proximityEvaluation.segmentEvalArray[i];
+            var owningSegment = mapData.getSegment(currentError.segmentIndex);
+            if(owningSegment.isTarget){
+                var curElement = new Object;
+                var errorVectorDeg = 180/Math.PI * currentError.errorVector.heading
+                var errorHeadingDeg = errorVectorDeg-90;
+                if(errorHeadingDeg>180)errorHeadingDeg-=360;
+                if(errorHeadingDeg<-180)errorHeadingDeg+=360;
+                var relHeroHeading = errorHeadingDeg - heroModel.heroHeading;
+                if(relHeroHeading>180)relHeroHeading-=360;
+                if(relHeroHeading<-180)relHeroHeading+=360;
+                curElement.heading = relHeroHeading;
+                curElement.inputString = owningSegment.segmentName;
+                curElement.distance = currentError.errorVector.magnitude;
+                objectList.push( curElement );
+            }
+        }
+        return sortAndReap( objectList );
+    }
+
+    function sortAndReap( objectList ){
+        for(var i=objectList.length-1; i>=0; i--){
+            if(Math.abs(objectList[i].heading) > rootStateModel.beamAngle.get()/2 ||
+                    objectList[i].distance > rootStateModel.distanceThresholdIn.get() ){
+                objectList.splice(i,1);
+            }
+        }
+        function compare(a,b){
+            if (a.heading < b.heading){
+                return -1;
+            }
+            if (a.heading > b.heading){
+                return 1;
+            }
+            return 0;
+        }
+        objectList.sort(compare);
+        return appendOclocks(objectList);
+    }
+
+    function appendOclocks(objectList){
+        var oclockList = ["six" , "seven" , "eight" , "nine" , "ten" , "eleven" ,
+                          "twelve" , "one" , "two" , "three" , "four" , "five"];
+        for(var i=0; i<objectList.length; i++){
+            var offHead = parseInt((objectList[i].heading + 205)/360*12);
+            objectList[i].inputString = oclockList[offHead] + "  " + objectList[i].inputString;
+        }
+        return objectList;
     }
 
     function nudgeLeft(){
@@ -172,6 +207,56 @@ Item {
         console.debug(JSON.stringify(motorData));
     }
 
+    function sendCaneEvent(){
+        var L = evaluation.proximityEvaluation.segmentEvalArray.length;
+        var minWallDistance = -1;
+        var minErrorIndex = -1;
+        var minSegIndex = -1;
+        for(var i=0; i<L; i++){
+            var currentError = evaluation.proximityEvaluation.segmentEvalArray[i];
+            var currentIndex = currentError.segmentIndex;
+            var currentSegment = mapData.getSegment(currentIndex);
+            if( currentSegment.segmentName === "Wall"){
+                if( i==0 || currentError.errorVector.magnitude < minWallDistance){
+                    minWallDistance = currentError.errorVector.magnitude;
+                    minSegIndex = currentIndex;
+                    minErrorIndex = i;
+                }
+            }
+        }
+        var minError = evaluation.proximityEvaluation.segmentEvalArray[minErrorIndex];
+        var minSeg = mapData.getSegment(minSegIndex);
+        var pathHeading = minSeg.pathHeading(minError.segmentPosition);
+        var incidenceHeading = 0;
+        var corPathHeading = 180/Math.PI*pathHeading;
+        corPathHeading = corPathHeading >= 180 ? corPathHeading-180 : corPathHeading;
+        var errVect = 180/Math.PI*minError.errorVector.heading+90
+        var result = corPathHeading+errVect+heroModel.heroOrientation;
+        if(result>180)result-=360;
+        if(result<-180)result+=360;
+        if(errVect >= 180) result = -(heroModel.heroHeading+corPathHeading-90);
+        else result = -(heroModel.heroHeading+corPathHeading+90);
+        if(result>180)result-=360;
+        if(result<-180)result+=360;
+        incidenceHeading = result;
+        var caneData = new Object;
+        caneData.distance = minWallDistance;
+        caneData.heading = incidenceHeading;
+        rootCaneSignal();
+        noamLemma.speak( "caneClick" , caneData );
+    }
+
+    Timer{
+        id: caneTimer
+        interval: 1000*rootStateModel.caneTime.get();
+        running: rootStateModel.caneRunning.get();
+        repeat: true
+        onTriggered:{
+            if(!root.connected)return;
+            sendCaneEvent();
+        }
+    }
+
     Timer{
         id: repeatTimer
         interval: 1000*rootStateModel.repeatTime.get();
@@ -183,6 +268,29 @@ Item {
                 sendFlashlightEvent();
             }
         }
+    }
+
+    Timer{
+        id: overviewSendTimer
+        interval: 1000*rootStateModel.overviewTime.get();
+        running: false
+        repeat: false
+        property var sendList
+        property var sendIndex
+        function sendOverviewMessages( inputList ){
+            if(!root.connected)return;
+            if(inputList.length){
+                stop();
+                var sendObject = inputList[0];
+                console.debug("sending overview stage");
+                console.debug(JSON.stringify(sendObject));
+                noamLemma.speak("speechTrigger" , sendObject);
+                sendList = inputList;
+                sendList.shift();
+                start();
+            }
+        }
+        onTriggered: sendOverviewMessages( sendList );
     }
 
     Timer{

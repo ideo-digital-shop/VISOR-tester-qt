@@ -164,7 +164,8 @@ Item {
         for(var i=0; i < nSegments; i++){
             testSegment = getSegment(i);
             testError = testSegment.evaluatePointToSegment ( evalPoint );            
-            testError.cartPosition = testSegment.pathCoord( testError.segmentPosition );            
+            testError.cartPosition = testSegment.pathCoord( testError.segmentPosition );
+            testError.segmentIndex = i;
             segmentEvalArray.push( testError );            
             if(testError.errorVector.magnitude < errorVector.magnitude || i==0){
                 errorVector.heading = testError.errorVector.heading;
@@ -174,9 +175,9 @@ Item {
             }
         }
 
-//        result.errorVector = errorVector;
-//        result.networkPosition = networkPosition;
-//        result.cartPosition = getNetworkCoord( networkPosition );
+        result.errorVector = errorVector;
+        result.networkPosition = networkPosition;
+        result.cartPosition = getNetworkCoord( networkPosition );
         result.segmentEvalArray = segmentEvalArray;
 
         return result;
