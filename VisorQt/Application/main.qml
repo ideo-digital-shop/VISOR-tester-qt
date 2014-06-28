@@ -5,6 +5,7 @@ TODO:
 • signal handler - connect to noam if config and connected, connect internal if not config
 • expose some shit to config file
 • Add 'mouse control on/off' button
+• Remove dynamic overview stuff
 */
 
 import QtQuick 2.2

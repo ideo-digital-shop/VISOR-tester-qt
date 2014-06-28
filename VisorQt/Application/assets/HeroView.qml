@@ -58,7 +58,7 @@ Item {
             id: distThresh
             smooth: true
             antialiasing: true
-            width: 2 * pixelsPerMeterScale * rootStateModel.distanceThresholdIn.get()
+            width: 2 * pixelsPerMeterScale * rootStateModel.distanceThresholdIn
             height: width
             radius: width / 2
             anchors.centerIn: parent

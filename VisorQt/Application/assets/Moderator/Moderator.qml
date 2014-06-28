@@ -49,27 +49,15 @@ Rectangle{
                     if(!noamIsConnected)sendFlashSignal();
                     else noamLemma.speak("sendFlashSignal", true);
                 }
-            }
-            Button{
-                id: dynamicOverview
-                width: 160
-                height: 30
-                label: "Send Overview"
-                fillColor: "#0A2036"
-                textColor: "#DFDFDF"
-                animateClick: true
-                onClicked: {
-                    eventManager.sendOverviewEvent();
-                }
-            }
+            }            
             Item{
                 height: childrenRect.height
                 width: childrenRect.width
                 Button{
                     id: sendOverviewButton1
-                    width: 100
+                    width: 160
                     height: 30
-                    label: "Woz 1"
+                    label: "Woz Overview 1"
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
@@ -80,9 +68,9 @@ Rectangle{
                 Button{
                     id: sendOverviewButton2
                     anchors{ left: sendOverviewButton1.right; leftMargin: 8}
-                    width: 100
+                    width: 160
                     height: 30
-                    label: "Woz 2"
+                    label: "Woz Overview 2"
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
@@ -119,40 +107,7 @@ Rectangle{
                 onCurrentValueChanged: {
                     rootStateModel.repeatTime.set( targetSynch );
                 }
-            }
-            ValueSlider{
-                id: overviewTimeSlider
-                sliderWidth: 240
-                minValue: .15
-                maxValue: 5
-                initialValue: rootStateModel.overviewTime.initialValue;
-                labelText: "Overview Time"
-                onCurrentValueChanged: {
-                    rootStateModel.overviewTime.set( targetSynch );
-                }
-            }
-            ValueSlider{
-                id: beamAngleSlider
-                sliderWidth: 240
-                minValue: 0
-                maxValue: 360
-                initialValue: rootStateModel.beamAngle.initialValue;
-                labelText: "Beam Angle"
-                onCurrentValueChanged: {
-                    rootStateModel.beamAngle.set( targetSynch );
-                }
-            }
-            ValueSlider{
-                id: distanceThresholdSlider
-                sliderWidth: 240
-                minValue: 0
-                maxValue: 50
-                initialValue: parseInt( rootStateModel.distanceThresholdIn.initialValue / 12 );
-                labelText: "Distance Threshold - ft"
-                onCurrentValueChanged: {
-                    rootStateModel.distanceThresholdIn.set( targetSynch * 12 );
-                }
-            }
+            }            
             ValueSlider{
                 id: motorIntensitySlider
                 sliderWidth: 240
@@ -204,71 +159,7 @@ Rectangle{
                     height: 30
                     active: (rootStateModel.flashlightScanMode.get() === "new")
                 }
-            }
-            //            SelectorCluster{
-            //                id: useModeSelector
-            //                width: 320
-            //                height: 94
-            //                labelText: "Use Mode"
-            //                onSelectedSignal: {
-            //                    rootStateModel.useMode.set( selectionParameter );
-            //                }
-            //                SelectorButton{
-            //                    id: flashlight
-            //                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-            //                    label: "Flashlight"
-            //                    selectionParameter: "flashlight"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.useMode.get() === "flashlight")
-            //                }
-            //                SelectorButton{
-            //                    id: overview
-            //                    anchors {left: flashlight.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-            //                    label: "Overview"
-            //                    selectionParameter: "overview"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.useMode.get() === "overview")
-            //                }
-            //            }
-
-            //            SelectorCluster{
-            //                id: soundModeSelector
-            //                width: 320
-            //                height: 134
-            //                labelText: " Sound Mode"
-            //                onSelectedSignal: {
-            //                    rootStateModel.soundMode.set( selectionParameter );
-            //                }
-            //                SelectorButton{
-            //                    id: binaural
-            //                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-            //                    label: "Binaural"
-            //                    selectionParameter: "binaural"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.soundMode.get() == "binaural")
-            //                }
-            //                SelectorButton{
-            //                    id: stereo
-            //                    anchors {left: binaural.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-            //                    label: "Stereo"
-            //                    selectionParameter: "stereo"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.soundMode.get() == "stereo")
-            //                }
-            //                SelectorButton{
-            //                    id: mono
-            //                    anchors {left: stereo.left; top: stereo.bottom; topMargin:8}
-            //                    label: "Mono"
-            //                    selectionParameter: "mono"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.soundMode.get() == "mono")
-            //                }
-            //            }
+            }           
         }
 
         Column{
@@ -276,45 +167,7 @@ Rectangle{
             width: 340
             spacing: 20
             height: container.height
-            anchors {left: columnA.right; leftMargin: 20}
-            //            SelectorCluster{
-            //                id: feedbackModeSelector
-            //                width: 320
-            //                height: 134
-            //                labelText: " Feedback Mode"
-            //                onSelectedSignal: {
-            //                    // rootStateModel.feedbackMode.set( selectionParameter );
-            //                }
-            //                SelectorButton{
-            //                    id: standing
-            //                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-            //                    label: "Standing"
-            //                    selectionParameter: "standing"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.feedbackMode.get() === "standing")
-            //                }
-            //                SelectorButton{
-            //                    id: moving
-            //                    enabled: false
-            //                    anchors {left: standing.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-            //                    label: "Moving"
-            //                    selectionParameter: "moving"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.feedbackMode.get() === "moving")
-            //                }
-            //                SelectorButton{
-            //                    id: silent
-            //                    anchors {left: moving.left; top: moving.bottom; topMargin:8}
-            //                    label: "Silent"
-            //                    enabled: false
-            //                    selectionParameter: "silent"
-            //                    width: 120
-            //                    height: 30
-            //                    active: (rootStateModel.feedbackMode.get() === "silent")
-            //                }
-            //            }
+            anchors {left: columnA.right; leftMargin: 20}          
             SelectorCluster{
                 id: imuSelector
                 width: 320
@@ -578,332 +431,9 @@ Rectangle{
                     active: rootStateModel.fullButtonState
                     MouseArea{anchors.fill:parent} //deactivate control
                 }
-            }
-            Item{
-                width: childrenRect.width
-                height: childrenRect.height
-                Button{
-                    id: caneButton
-                    x:8
-                    width: 200
-                    height: 30
-                    label: active ? "Cane Running" : "Cane Stopped"
-                    active: rootStateModel.caneRunning.get();
-                    onClicked: rootStateModel.caneRunning.set(!rootStateModel.caneRunning.get());
-                }
-                Rectangle{
-                    id: ind
-                    width:30
-                    height:30
-                    anchors{ left: caneButton.right; leftMargin: 8}
-                    color:"#00FFFFFF"
-                    border{color:"cyan";width:1}
-                    SequentialAnimation{
-                        id: caneAnim
-                        ColorAnimation{target: ind; property: "color"; to:"#FFFFFF"; duration: 50}
-                        ColorAnimation{target: ind; property: "color"; to:"#00FFFFFF"; duration: 50}
-                    }
-                    Component.onCompleted:{
-                        rootCaneSignal.connect(caneAnim.start);
-                    }
-                }
-            }
-            ValueSlider{
-                id: canePeriodSlider
-                sliderWidth: 240
-                minValue: .1
-                maxValue: 5
-                initialValue: rootStateModel.caneTime.initialValue;
-                labelText: "Cane Period"
-                onCurrentValueChanged: {
-                    rootStateModel.caneTime.set(targetSynch);
-                }
-            }
+            }                        
         }
 
-        /*
-
-        Column{
-            id: columnC
-            width: childrenRect.width
-            //anchors {left: columnB.rigth; leftMargin:20}
-            x: 700
-            spacing: 20
-            Section{
-                id:eventControls
-                sectionColor: "#FFFFFF"
-                mainLabelText: "EVENT CONTROLS"
-                //anchors{left: userControls.right; leftMargin: 20; top: desktopControls.bottom; topMargin:20}
-                Button{id:volumeDownButton
-                    width:70; height:40
-                    anchors{left: eventControls.mainLabel.left; top: eventControls.mainLabel.bottom; topMargin:20; leftMargin: 4}
-                    label: "VOL -"
-                    onClicked: {
-                        eventSender.send("volumeDown", true);
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:volumeUpButton
-                    width:70; height:40
-                    anchors{left: volumeDownButton.right; top: eventControls.mainLabel.bottom; topMargin:20; leftMargin: 20}
-                    label: "VOL +"
-                    onClicked: {
-                        eventSender.send("volumeUp", true);
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:wiperModeButton
-                    width:125; height:40
-                    anchors{left: eventControls.mainLabel.left; top: volumeDownButton.bottom; topMargin:20; leftMargin: 4}
-                    label: "WIPERS"
-                    onClicked: {
-                        switch (wiperNumber){
-                        case 0:
-                            eventSender.send("wiperKnob", "1")
-                            break
-                        case 1:
-                            eventSender.send("wiperKnob", "2")
-                            break
-                        case 2:
-                            eventSender.send("wiperKnob", "0")
-                            break
-                        }
-                        if(wiperNumber == 2) wiperNumber = 0
-                        else wiperNumber++
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:lightModeButton
-                    width:125; height:40
-                    anchors{left: wiperModeButton.right; top: volumeDownButton.bottom; topMargin:20; leftMargin: 20}
-                    label: "LIGHTS"
-                    onClicked: {
-                        switch (lightNumber){
-                        case 0:
-                            eventSender.send("lightKnob", "1")
-                            break
-                        case 1:
-                            eventSender.send("lightKnob", "2")
-                            break
-                        case 2:
-                            eventSender.send("lightKnob", "3")
-                            break
-                        case 3:
-                            eventSender.send("lightKnob", "0")
-                            break
-                        }
-                        if(lightNumber == 3) lightNumber = 0
-                        else lightNumber++
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:cruiseButton
-                    width:125; height:40
-                    anchors{left:eventControls.mainLabel.left; top:lightModeButton.bottom; topMargin:20; leftMargin: 4}
-                    label: "CRUISE"
-                    onClicked: {
-                        eventSender.send("cruise", "1");
-                    }
-                    active: rootVehicleStatusModel.cruiseActive.get()
-
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:cruiseMinusButton
-                    width:35; height:40
-                    anchors{left:cruiseButton.right; top:cruiseButton.top; topMargin:0; leftMargin: 20}
-                    label: "-"
-                    onClicked: {
-                        eventSender.send("cruiseMinus", "1");
-                    }
-                    active: rootVehicleStatusModel.cruiseActive.get()
-
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:cruisePlusButton
-                    width:35; height:40
-                    anchors{left:cruiseMinusButton.right; top:cruiseButton.top; topMargin:0; leftMargin: 20}
-                    label: "+"
-                    onClicked: {
-                        eventSender.send("cruisePlus", "1");
-                    }
-                    active: rootVehicleStatusModel.cruiseActive.get()
-
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:cruiseGapButton
-                    width:125; height:40
-                    anchors{left:eventControls.mainLabel.left; top:cruisePlusButton.bottom; topMargin:20; leftMargin: 4}
-                    label: "CYCLE GAP"
-                    onClicked: {
-                        eventSender.send("gap", "1");
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:gapAlertButton
-                    width:125; height:40
-                    anchors{left:cruiseGapButton.right; top:cruiseGapButton.top; topMargin:0; leftMargin: 20}
-                    label: "CAR AHEAD"
-                    onClicked: {
-                        eventSender.send("cruiseRadarActive", "1");
-                    }
-                    // active: rootVehicleStatusModel.cruiseRadarActive.get()
-
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-
-                Text{
-                    id:alertsLabel
-                    anchors{left:eventControls.mainLabel.left; top:cruiseGapButton.bottom; topMargin:20; leftMargin: 4}
-                    text:"ALERTS"
-                    font.pixelSize: 24
-                    font.family: hmicondensed.name
-                    color:"#FFFFFF"
-                }
-                Button{id:lowFuelButton
-                    width:70; height:40
-                    anchors{left:eventControls.mainLabel.left; top:alertsLabel.bottom; topMargin:20; leftMargin: 4}
-                    label: "FUEL"
-                    onClicked: {
-                        if(rootTelemetryModel.fuel > .1) eventSender.send("fuelLevel", .07);
-                        else eventSender.send("fuelLevel", .7);
-                    }
-                    fillColor: rootTelemetryModel.fuel < .1 ? "#B05050" : "#101010"
-                    textColor: rootTelemetryModel.fuel < .1 ? "#101010" : "#AFAFAF"
-                }
-                Button{id:textButton
-                    width:70; height:40
-                    anchors{left: lowFuelButton.right; top: lowFuelButton.top; leftMargin: 20}
-                    label: "TEXT"
-                    onClicked: {
-                        eventSender.send("incomingText", 1);
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:callButton
-                    width:70; height:40
-                    anchors{left: textButton.right; top: lowFuelButton.top; leftMargin: 20}
-                    label: "CALL"
-                    onClicked: {
-                        eventSender.send("incomingCall", 1);
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-
-                Text{
-                    id:categoriesLabel
-                    anchors{left:eventControls.mainLabel.left; top:callButton.bottom; topMargin:20; leftMargin: 4}
-                    text:"CATEGORIES"
-                    font.pixelSize: 24
-                    font.family: hmicondensed.name
-                    color:"#FFFFFF"
-                }
-                Button{id:killMusic
-                    width:70; height:40
-                    anchors{left: eventControls.mainLabel.left; top: categoriesLabel.bottom; topMargin:20; leftMargin: 4}
-                    label: "MUS"
-                    active: rootVehicleStatusModel.audioSource != rootVehicleStatusModel.audioSources.off
-                    onClicked: rootVehicleStatusModel.setSource("off");
-                }
-                Button{id:setRoute
-                    width:70; height:40
-                    anchors{left: killMusic.right; top: killMusic.top; leftMargin: 20}
-                    label: rootNavModel.routeIsSet.get() ? "CLEAR ROUTE" : "SET ROUTE"
-                    active: rootNavModel.routeIsSet.get()
-                    onClicked: eventSender.send("routeIsSet", !active );
-                }
-                Button{id:phonePaired
-                    width:70; height:40
-                    anchors{left: setRoute.right; top: killMusic.top; leftMargin: 20}
-                    label: "COM"
-                    active: rootVehicleStatusModel.phoneModel.phonePaired.get()
-                    onClicked: eventSender.send("phonePaired", !active );
-                }
-
-                Text{
-                    id:miscLabel
-                    anchors{left:eventControls.mainLabel.left; top:killMusic.bottom; topMargin:20; leftMargin: 4}
-                    text:"MISC"
-                    font.pixelSize: 24
-                    font.family: hmicondensed.name
-                    color:"#FFFFFF"
-                }
-                Button{id:shortcutsButton
-                    width:160; height:40
-                    anchors{left: eventControls.mainLabel.left; top: miscLabel.bottom; topMargin:20; leftMargin: 4}
-                    label: "ADD PRESETS"
-                    onClicked: {
-                        eventSender.send("exampleShortcuts", true);
-                    }
-                    fillColor: "#101010"
-                    textColor: "#AFAFAF"
-                }
-                Button{id:demoMode
-                    width:100; height:40
-                    anchors{left: shortcutsButton.left; top: shortcutsButton.bottom; topMargin:20; leftMargin: 4}
-                    label: "DRV DEMO"
-                    active: rootTelemetryModel.demoMode
-                    onClicked: eventSender.send("demoMode", !active );
-                }
-                Button{id:navDemoModeBtn
-                    width:100; height:40
-                    anchors{left: demoMode.right; top: demoMode.top; leftMargin: 4}
-                    label: "NAV DEMO"
-                    active: rootVehicleStatusModel.navDemoMode.get()
-                    onClicked: eventSender.send("navDemoMode", "1" )
-                }
-                Button{id:navDemoPauseBtn
-                    width:100; height:40
-                    anchors{left: navDemoModeBtn.right; top: navDemoModeBtn.top; leftMargin: 4}
-                    label: "PAUSE"
-                    active: false
-                    onClicked: eventSender.send("navDemoPause", "1" )
-                }
-            }
-            Section{
-                id: desktopControls
-                sectionColor: "#FFFFFF"
-                mainLabelText: "DESKTOP CONTROLS"
-                //anchors{left: vehicleControls.right; leftMargin: 20; top: vehicleControls.top}
-                Button{id: clusterHideButton
-                    width: 120; height: 60
-                    label: clusterShown ? "HIDE CLUSTER" : "SHOW CLUSTER"
-                    anchors{left: desktopControls.mainLabel.left; top: desktopControls.mainLabel.bottom; topMargin:20; leftMargin: 4}
-                    fillColor: clusterShown ? "#0A3620" : "#101010"
-                    textColor: "#AFAFAF"
-                    labelObj.horizontalAlignment: Text.AlignHCenter
-                    labelObj.verticalAlignment: Text.AlignVCenter
-                    onClicked:{
-                        if(clusterShown){showCluster(false);}
-                        else {showCluster(true);}
-                    }
-                }
-                Button{id: hudHideButton
-                    width: 120; height: 60
-                    label: hudShown ? "HIDE HUD" : "SHOW HUD"
-                    anchors{left: clusterHideButton.left; top: clusterHideButton.bottom; topMargin:10}
-                    fillColor: hudShown ? "#0A3620" : "#101010"
-                    textColor: "#AFAFAF"
-                    labelObj.horizontalAlignment: Text.AlignHCenter
-                    labelObj.verticalAlignment: Text.AlignVCenter
-                    onClicked:{
-                        if(hudShown){showHud(false);}
-                        else {showHud(true);}
-                    }
-                }
-            }
-        }
-        */
         focus: true
         Keys.onPressed: {
             if( event.key === Qt.Key_Q )

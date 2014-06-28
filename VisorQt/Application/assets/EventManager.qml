@@ -89,7 +89,7 @@ Item {
             curElement.type = targetSeg.segmentType;
             curElement.name = targetSeg.segmentName;
         }
-        if(curElement.magnitude > rootStateModel.distanceThresholdIn.get()){
+        if(curElement.magnitude > rootStateModel.distanceThresholdIn){
             curElement.type = "None"
             curElement.magnitude = 0;
             curElement.name = "";
@@ -138,7 +138,7 @@ Item {
     function sortAndReap( objectList ){
         for(var i=objectList.length-1; i>=0; i--){
             if(Math.abs(objectList[i].heading) > rootStateModel.beamAngle.get()/2 ||
-                    objectList[i].distance > rootStateModel.distanceThresholdIn.get() ){
+                    objectList[i].distance > rootStateModel.distanceThresholdIn ){
                 objectList.splice(i,1);
             }
         }
@@ -207,56 +207,6 @@ Item {
         console.debug(JSON.stringify(motorData));
     }
 
-    function sendCaneEvent(){
-        var L = evaluation.proximityEvaluation.segmentEvalArray.length;
-        var minWallDistance = -1;
-        var minErrorIndex = -1;
-        var minSegIndex = -1;
-        for(var i=0; i<L; i++){
-            var currentError = evaluation.proximityEvaluation.segmentEvalArray[i];
-            var currentIndex = currentError.segmentIndex;
-            var currentSegment = mapData.getSegment(currentIndex);
-            if( currentSegment.segmentName === "Wall"){
-                if( i==0 || currentError.errorVector.magnitude < minWallDistance){
-                    minWallDistance = currentError.errorVector.magnitude;
-                    minSegIndex = currentIndex;
-                    minErrorIndex = i;
-                }
-            }
-        }
-        var minError = evaluation.proximityEvaluation.segmentEvalArray[minErrorIndex];
-        var minSeg = mapData.getSegment(minSegIndex);
-        var pathHeading = minSeg.pathHeading(minError.segmentPosition);
-        var incidenceHeading = 0;
-        var corPathHeading = 180/Math.PI*pathHeading;
-        corPathHeading = corPathHeading >= 180 ? corPathHeading-180 : corPathHeading;
-        var errVect = 180/Math.PI*minError.errorVector.heading+90
-        var result = corPathHeading+errVect+heroModel.heroOrientation;
-        if(result>180)result-=360;
-        if(result<-180)result+=360;
-        if(errVect >= 180) result = -(heroModel.heroHeading+corPathHeading-90);
-        else result = -(heroModel.heroHeading+corPathHeading+90);
-        if(result>180)result-=360;
-        if(result<-180)result+=360;
-        incidenceHeading = result;
-        var caneData = new Object;
-        caneData.distance = minWallDistance;
-        caneData.heading = incidenceHeading;
-        rootCaneSignal();
-        noamLemma.speak( "caneClick" , caneData );
-    }
-
-    Timer{
-        id: caneTimer
-        interval: 1000*rootStateModel.caneTime.get();
-        running: rootStateModel.caneRunning.get();
-        repeat: true
-        onTriggered:{
-            if(!root.connected)return;
-            sendCaneEvent();
-        }
-    }
-
     Timer{
         id: repeatTimer
         interval: 1000*rootStateModel.repeatTime.get();
@@ -268,30 +218,7 @@ Item {
                 sendFlashlightEvent();
             }
         }
-    }
-
-    Timer{
-        id: overviewSendTimer
-        interval: 1000*rootStateModel.overviewTime.get();
-        running: false
-        repeat: false
-        property var sendList
-        property var sendIndex
-        function sendOverviewMessages( inputList ){
-            if(!root.connected)return;
-            if(inputList.length){
-                stop();
-                var sendObject = inputList[0];
-                console.debug("sending overview stage");
-                console.debug(JSON.stringify(sendObject));
-                noamLemma.speak("speechTrigger" , sendObject);
-                sendList = inputList;
-                sendList.shift();
-                start();
-            }
-        }
-        onTriggered: sendOverviewMessages( sendList );
-    }
+    }   
 
     Timer{
         id: waitForFullPressTimer

@@ -3,10 +3,7 @@ import Lemma 1.0
 
 Item {
     property bool isPositionController: true
-    property alias beamAngle: beamAngleSynch
-    property alias repeatTime: repeatTimeSynch
-    property alias overviewTime: overviewTimeSynch
-    property alias distanceThresholdIn: distanceThresholdInSynch
+    property alias repeatTime: repeatTimeSynch        
     property alias useMode: useModeSynch
     property alias soundMode: soundModeSynch
     property alias feedbackMode: feedbackModeSynch
@@ -19,12 +16,12 @@ Item {
     property alias motorIntensity: motorIntensitySynch
     property alias motorDuration: motorDurationSynch
     property alias vibeMode: vibeModeSynch
-    property alias buttonEnabled: buttonEnabledSynch
-    property alias caneTime: caneTimeSynch
-    property alias caneRunning: caneRunningSynch
+    property alias buttonEnabled: buttonEnabledSynch    
 
     property bool halfButtonState: false
     property bool fullButtonState: false
+
+    property int distanceThresholdIn: 30*12
 
     NoamLemmaHears{
         topic: "BTN2"
@@ -65,34 +62,9 @@ Item {
     ///////////////
 
     SynchronizedVar{
-        id: beamAngleSynch
-        initialValue: 180
-        synchMessageName: "beamAngleSynch"
-    }
-    SynchronizedVar{
         id: repeatTimeSynch
         initialValue: 2
         synchMessageName: "repeatTimeSynch"
-    }
-    SynchronizedVar{
-        id: overviewTimeSynch
-        initialValue: 1
-        synchMessageName: "overviewTimeSynch"
-    }
-    SynchronizedVar{
-        id: caneTimeSynch
-        initialValue: .4
-        synchMessageName: "caneTimeSynch"
-    }
-    SynchronizedVar{
-        id: caneRunningSynch
-        initialValue: false
-        synchMessageName: "caneRunningSynch"
-    }
-    SynchronizedVar{
-        id: distanceThresholdInSynch
-        initialValue: 360
-        synchMessageName: "distanceThresholdInSynch"
     }
     SynchronizedVar{
         id: useModeSynch
