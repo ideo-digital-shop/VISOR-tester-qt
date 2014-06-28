@@ -210,9 +210,14 @@ Rectangle {
             }
 
             onPressed: {
-                //TODO: intercept based on position control status
-                posPoint.x = Qt.binding( function() { return (mouseX - mouseArea.x)/pixelsPerMeterScale } )
-                posPoint.y = Qt.binding( function() { return (mouseY - mouseArea.y)/pixelsPerMeterScale } )
+                if( !rootStateModel.isPositionController ) return;
+                posPoint.x = Qt.binding( function() { return (mouseX - mouseArea.x)/pixelsPerMeterScale } );
+                posPoint.y = Qt.binding( function() { return (mouseY - mouseArea.y)/pixelsPerMeterScale } );
+            }
+            onReleased: {
+                if( !rootStateModel.isPositionController ) return;
+                posPoint.x = (mouseX - mouseArea.x)/pixelsPerMeterScale ;
+                posPoint.y = (mouseY - mouseArea.y)/pixelsPerMeterScale ;
             }
         }
     }

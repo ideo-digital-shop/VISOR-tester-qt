@@ -147,37 +147,6 @@ Rectangle {
         }
     }
 
-    //Text display of received noam message
-    Text {
-        id: sampleText
-        color: "white"
-        font.pixelSize: 24
-        text:{
-            if( noamIsConnected ){
-                if( !recMessage ) return qsTr("Click the mouse to send a message.");
-                else return recMessage;
-            }
-            else return qsTr("Looking for Noam Hosts...");
-        }
-        anchors.horizontalCenter: parent.horizontalCenter
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 60
-    }
-    Text {
-        id: masterStatusText
-        color: "white"
-        font.pixelSize: 24
-        text:{
-            if( isMasterModerator ){
-                return qsTr("Master moderator.");
-            }
-            else return qsTr("Secondary moderator.");
-        }
-        anchors.horizontalCenter: sampleText.horizontalCenter
-        anchors.top: sampleText.bottom
-        anchors.topMargin: 10
-    }
-
     //Track Noam connection status
     NoamConnectionStatus{
         onConnectionEstablished: noamIsConnected = true;
