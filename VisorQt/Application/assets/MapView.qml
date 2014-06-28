@@ -45,7 +45,7 @@ Rectangle {
         pixelsPerMeterScale:{
             var xppm = width/mapData.maxBoundPoint.x;
             var yppm = height/mapData.maxBoundPoint.y;
-            return Math.min( xppm , yppm );
+            return 1.5*Math.min( xppm , yppm );
         }
     }
 
