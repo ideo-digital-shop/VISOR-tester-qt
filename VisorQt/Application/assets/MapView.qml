@@ -33,7 +33,14 @@ Rectangle {
     height: 300
 
     color: "#444"
-
+    Button{
+        x:8
+        width: 200
+        height: 30
+        label: active ? "Is Mouse Controller" : "Is Moderator"
+//        active: rootStateModel.isPositionController
+//        onClicked: rootStateModel.isPositionController = !rootStateModel.isPositionController;
+    }
     MapRenderer{
         id: mapRenderer
         mapData: mapData

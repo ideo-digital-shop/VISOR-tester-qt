@@ -38,14 +38,6 @@ Rectangle{
             Item{width:1;height:1}
             x:20;
             Button{
-                x:8
-                width: 200
-                height: 30
-                label: active ? "Is Mouse Controller" : "Is Moderator"
-                active: rootStateModel.isEventController
-                onClicked: rootStateModel.isEventController = !rootStateModel.isEventController;
-            }
-            Button{
                 id: sendFlashButton
                 width: 120
                 height: 30

@@ -2,13 +2,11 @@
 
 /*
 TODO:
-• Serialize graph data - send out the entire graph over noam?
-• Draw grid in renderer
 • signal handler - connect to noam if config and connected, connect internal if not config
 • expose some shit to config file
-• build event handler (sends abstract events)
-• add speech, tone, vibe toggles
+• Add 'mouse control on/off' button
 */
+
 import QtQuick 2.2
 import QtQuick.Window 2.1
 import Lemma 1.0
@@ -28,6 +26,11 @@ Rectangle {
     property int clickCount: 0
     property bool noamIsConnected: false
     property bool useNoamPosition: false
+    property bool isMasterModerator: masterStatusHandler.isMasterModerator
+    onIsMasterModeratorChanged: {
+            if( isMasterModerator ) connectEventManager();
+            else disconnectEventManager();
+    }
 
     property string recMessage: ""
 
@@ -63,11 +66,8 @@ Rectangle {
     NoamLemmaHears{
         topic: "heroPosSynch"
         onNewMapEvent: {
-            if( !rootStateModel.isEventController ){
-                var newPos = Qt.point( value.x , value.y );
-                console.debug("new pos: " + newPos.x + ", " + newPos.y);
-                mapView.heroModel.setPosition( newPos );
-            }
+            var newPos = Qt.point( value.x , value.y );
+            mapView.heroModel.setPosition( newPos );
         }
     }
     NoamLemmaHears{
@@ -107,10 +107,6 @@ Rectangle {
 
     StateModel{
         id: rootStateModel
-        onIsEventControllerChanged: {
-            if( isEventController ) connectEventManager();
-            else disconnectEventManager();
-        }
     }
 
     EventManager{
@@ -155,7 +151,7 @@ Rectangle {
     Text {
         id: sampleText
         color: "white"
-        font.pixelSize: 36
+        font.pixelSize: 24
         text:{
             if( noamIsConnected ){
                 if( !recMessage ) return qsTr("Click the mouse to send a message.");
@@ -165,13 +161,32 @@ Rectangle {
         }
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.bottom: parent.bottom
-        anchors.bottomMargin: 20
+        anchors.bottomMargin: 60
+    }
+    Text {
+        id: masterStatusText
+        color: "white"
+        font.pixelSize: 24
+        text:{
+            if( isMasterModerator ){
+                return qsTr("Master moderator.");
+            }
+            else return qsTr("Secondary moderator.");
+        }
+        anchors.horizontalCenter: sampleText.horizontalCenter
+        anchors.top: sampleText.bottom
+        anchors.topMargin: 10
     }
 
     //Track Noam connection status
     NoamConnectionStatus{
         onConnectionEstablished: noamIsConnected = true;
         onConnectionLost: noamIsConnected = false;
+    }
+
+    MasterStatusHandler{
+        id: masterStatusHandler
+        noamIsConnected: root.noamIsConnected
     }
 
     //    property int sendOrient: 0

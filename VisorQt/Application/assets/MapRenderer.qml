@@ -206,15 +206,11 @@ Rectangle {
             signal positionSignal( var posPoint )
             onPosPointChanged: positionSignal( posPoint );
             Component.onCompleted: {
-                positionSignal.connect( root.heroModel.setPosition);
+                positionSignal.connect( root.heroModel.setSynchPosition);
             }
 
             onPressed: {
-                //                var testObj = new Object;
-                //                testObj.param1 = 43;
-                //                testObj.param2 = "hey derr";
-                //                noamLemma.speak( "maxTestMap" , testObj);
-                if(!rootStateModel.isEventController) return;
+                //TODO: intercept based on position control status
                 posPoint.x = Qt.binding( function() { return (mouseX - mouseArea.x)/pixelsPerMeterScale } )
                 posPoint.y = Qt.binding( function() { return (mouseY - mouseArea.y)/pixelsPerMeterScale } )
             }

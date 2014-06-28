@@ -27,5 +27,6 @@
         <file>assets/MapData660.qml</file>
         <file>assets/EventManager.qml</file>
         <file>assets/SynchronizedSignal.qml</file>
+        <file>assets/MasterStatusHandler.qml</file>
     </qresource>
 </RCC>

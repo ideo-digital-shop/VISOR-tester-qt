@@ -9,14 +9,16 @@ Item {
     property real orientationOffset: rootStateModel.heroOrientationOffset.get()
     property real heroHeading: heroOrientation - 180
 
+    function setSynchPosition( posPoint ){
+        setPosition( posPoint );
+        var posObj = new Object;
+        posObj.x = posPoint.x;
+        posObj.y = posPoint.y;
+        noamLemma.speak( "heroPosSynch" , posObj );
+    }
+
     function setPosition( posPoint ){
         heroPositionMeters.x = posPoint.x;
-        heroPositionMeters.y = posPoint.y;
-        if(rootStateModel.isEventController){
-            var posObj = new Object;
-            posObj.x = posPoint.x;
-            posObj.y = posPoint.y;
-            noamLemma.speak( "heroPosSynch" , posObj );
-        }
+        heroPositionMeters.y = posPoint.y;        
     }
 }

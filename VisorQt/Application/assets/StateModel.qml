@@ -2,7 +2,7 @@ import QtQuick 2.0
 import Lemma 1.0
 
 Item {
-    property bool isEventController: false
+    property bool isPositionController: true
     property alias beamAngle: beamAngleSynch
     property alias repeatTime: repeatTimeSynch
     property alias overviewTime: overviewTimeSynch
