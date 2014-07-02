@@ -61,9 +61,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: {
-                        noamLemma.speak("wozOverview1", true);
-                    }
+                    onClicked: eventManager.woz1();
                 }
                 Button{
                     id: sendOverviewButton2
@@ -74,9 +72,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: {
-                        noamLemma.speak("wozOverview2", true);
-                    }
+                    onClicked: eventManager.woz2();
                 }
             }
             Button{
@@ -231,7 +227,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.nudgeLeft();
+                    onClicked: eventManager.sendPlayAudioMsg("nudgeLeft");
                 }
                 Button{
                     id: nudgeRight
@@ -242,7 +238,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.nudgeRight();
+                    onClicked: eventManager.sendPlayAudioMsg("nudgeRight");
                 }
             }
             Rectangle {
@@ -260,7 +256,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.turnLeft();
+                    onClicked: eventManager.sendPlayAudioMsg("turnLeft");
                 }
                 Button{
                     id: turnRight
@@ -271,7 +267,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.turnRight();
+                    onClicked: eventManager.sendPlayAudioMsg("turnRight");
                 }
                 Button{
                     id: goForward
@@ -282,7 +278,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.goForward();
+                    onClicked: eventManager.sendPlayAudioMsg("goForward");
                 }
             }
             Rectangle {
@@ -300,7 +296,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: noamLemma.speak("confirmArrival" , rootStateModel.targetObject.get());
+                    onClicked: eventManager.sendPlayAudioMsg("confirmArrival");
                 }
                 Button{
                     id: confirmBegin
@@ -311,7 +307,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: noamLemma.speak("confirmRouteBegin" , rootStateModel.targetObject.get());
+                    onClicked: eventManager.sendPlayAudioMsg("confirmRouteBegin");
                 }
                 Button{
                     id: bookmark
@@ -322,7 +318,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: noamLemma.speak("setBookmark" , rootStateModel.targetObject.get());
+                    onClicked: eventManager.sendPlayAudioMsg("setBookmark");
                 }
 
                 SelectorCluster{

@@ -62,7 +62,8 @@ Item {
             if(eventDataObj.object1.type != "None"  && (!rootStateModel.flashlightIsScanning.get() || eventDataObj.object1.name != "Wall")){
                 console.debug(JSON.stringify(eventDataObj));
                 console.debug("sending flashlight");
-                noamLemma.speak( "flashlightTrigger" , eventDataObj );
+                sendPlayAudioMsg(eventDataObj.object1.name);
+                //noamLemma.speak( "flashlightTrigger" , eventDataObj );
             }
         }
         if( eventDataObj.feedbackMode == "silent" || rootStateModel.vibeMode.get() ){
@@ -165,27 +166,50 @@ Item {
         return objectList;
     }
 
-    function nudgeLeft(){
-        if( rootStateModel.vibeMode.get() ) leftMotor();
+    // not currently used
+    function headingTo(){
+        sendPlayAudioMsg("headingTo");
     }
-    function nudgeRight(){
-        if( rootStateModel.vibeMode.get() ) rightMotor();
+
+    // not currently used
+    function arrivedAt(){
+        sendPlayAudioMsg("arrivedAt");
     }
-    function turnLeft(){
-        noamLemma.speak("turnLeft", true);
-        if( rootStateModel.vibeMode.get() ) leftMotor();
+
+    function woz1(){
+        sendPlayAudioMsg("09");
+        sendPlayAudioMsg("Table");
+        sendPlayAudioMsg("10");
+        sendPlayAudioMsg("People");
+        sendPlayAudioMsg("12");
+        sendPlayAudioMsg("Table");
+        sendPlayAudioMsg("01");
+        sendPlayAudioMsg("FrontDesk");
+        sendPlayAudioMsg("03");
+        sendPlayAudioMsg("Kitchen");
     }
-    function turnRight(){
-        noamLemma.speak("turnRight", true);
-        if( rootStateModel.vibeMode.get() ) rightMotor();
+
+    function woz2(){
+        sendPlayAudioMsg("09");
+        sendPlayAudioMsg("Table");
+        sendPlayAudioMsg("10");
+        sendPlayAudioMsg("People");
+        sendPlayAudioMsg("12");
+        sendPlayAudioMsg("Table");
+        sendPlayAudioMsg("01");
+        sendPlayAudioMsg("FrontDesk");
+        sendPlayAudioMsg("03");
+        sendPlayAudioMsg("Kitchen");
     }
-    function goForward(){
-        noamLemma.speak("forward", true);
-        if( rootStateModel.vibeMode.get() ) {
-            rightMotor();
-            leftMotor();
-        }
+
+    function sendPlayAudioMsg(msg){
+        var audioCtrlMsg = new Array;
+        audioCtrlMsg.push("PLAY_AUDIO");
+        audioCtrlMsg.push(msg);
+        noamLemma.speak("AudioPlay", JSON.stringify(audioCtrlMsg));
+        console.debug(JSON.stringify(audioCtrlMsg));
     }
+
 
     function leftMotor(){
         var motorData = new Array;
