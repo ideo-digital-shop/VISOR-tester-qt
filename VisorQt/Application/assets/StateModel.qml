@@ -24,7 +24,7 @@ Item {
     property int distanceThresholdIn: 30*12
 
     NoamLemmaHears{
-        topic: "BTN2"
+        topic: "BTN1"
         onNewEvent:{
             if(!buttonEnabled.get())return;
             if( value == 1 || value == true ) halfButtonState = true;
@@ -42,7 +42,7 @@ Item {
     }
 
     NoamLemmaHears{
-        topic: "BTN3"
+        topic: "BTN2"
         onNewEvent:{
             if(!buttonEnabled.get())return;
             if( value == 1 || value == true ) fullButtonState = true;

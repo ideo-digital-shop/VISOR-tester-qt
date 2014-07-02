@@ -11,6 +11,8 @@ Item {
     property int currentFacingIndex: evaluation.headingEvaluation.networkPosition ? evaluation.headingEvaluation.networkPosition.segmentIndex : -1
     property bool connected: false
     property string useMode: rootStateModel.buttonFunctionMode.get();
+    property var soundsToPlay : []
+
     onUseModeChanged: {
         rootStateModel.flashlightIsScanning.set( false );
     }
@@ -176,30 +178,61 @@ Item {
         sendPlayAudioMsg("arrivedAt");
     }
 
+    Timer {
+        id : soundtimer
+        interval : 100
+        running: true
+        repeat: true
+        triggeredOnStart: false
+        onTriggered: {
+            var now = new Date().getTime();
+            var soundToPlay;
+            var newList = root.soundsToPlay;
+            for(soundToPlay in root.soundsToPlay){
+                var item = root.soundsToPlay[soundToPlay];
+                if(item[0] < now){
+                    root.sendPlayAudioMsg(item[1]);
+                    newList.splice(soundToPlay, 1);
+                }
+            }
+            root.soundsToPlay = newList;
+        }
+    }
+
+    function playSoundAfter(sound, offset)
+    {
+        var time = new Date().getTime() + offset;
+        var audioCtrlMsg = new Array;
+        audioCtrlMsg.push(time);
+        audioCtrlMsg.push(sound);
+        root.soundsToPlay.push(audioCtrlMsg);
+        console.log("Added " + sound + " at " + time);
+    }
+
     function woz1(){
-        sendPlayAudioMsg("09");
-        sendPlayAudioMsg("Table");
-        sendPlayAudioMsg("10");
-        sendPlayAudioMsg("People");
-        sendPlayAudioMsg("12");
-        sendPlayAudioMsg("Table");
-        sendPlayAudioMsg("01");
-        sendPlayAudioMsg("FrontDesk");
-        sendPlayAudioMsg("03");
-        sendPlayAudioMsg("Kitchen");
+        playSoundAfter("09", 0);
+        playSoundAfter("Table", 1000);
+        playSoundAfter("10", 2000);
+        playSoundAfter("People", 3000);
+        playSoundAfter("12", 4000);
+        playSoundAfter("Table", 5000);
+        playSoundAfter("01", 6000);
+        playSoundAfter("FrontDesk", 7000);
+        playSoundAfter("03", 8000);
+        playSoundAfter("Kitchen", 9000);
     }
 
     function woz2(){
-        sendPlayAudioMsg("09");
-        sendPlayAudioMsg("Table");
-        sendPlayAudioMsg("10");
-        sendPlayAudioMsg("People");
-        sendPlayAudioMsg("12");
-        sendPlayAudioMsg("Table");
-        sendPlayAudioMsg("01");
-        sendPlayAudioMsg("FrontDesk");
-        sendPlayAudioMsg("03");
-        sendPlayAudioMsg("Kitchen");
+        playSoundAfter("09", 0);
+        playSoundAfter("Table", 1000);
+        playSoundAfter("10", 2000);
+        playSoundAfter("People", 3000);
+        playSoundAfter("12", 4000);
+        playSoundAfter("Table", 5000);
+        playSoundAfter("01", 6000);
+        playSoundAfter("FrontDesk", 7000);
+        playSoundAfter("03", 8000);
+        playSoundAfter("Kitchen", 9000);
     }
 
     function sendPlayAudioMsg(msg){
