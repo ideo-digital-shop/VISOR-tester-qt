@@ -227,7 +227,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("nudgeLeft");
+                    onClicked: eventManager.nudgeLeft();
                 }
                 Button{
                     id: nudgeRight
@@ -238,7 +238,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("nudgeRight");
+                    onClicked: eventManager.nudgeRight();
                 }
             }
             Rectangle {
@@ -256,7 +256,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("turnLeft");
+                    onClicked: eventManager.turnLeft();
                 }
                 Button{
                     id: turnRight
@@ -267,7 +267,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("turnRight");
+                    onClicked: eventManager.turnRight();
                 }
                 Button{
                     id: goForward
@@ -296,7 +296,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("confirmArrival");
+                    onClicked: eventManager.arrivedAt(rootStateModel.targetObject.get());
                 }
                 Button{
                     id: confirmBegin
@@ -307,7 +307,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("confirmRouteBegin");
+                    onClicked: eventManager.headingTo(rootStateModel.targetObject.get());
                 }
                 Button{
                     id: bookmark
@@ -318,7 +318,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("setBookmark");
+                    onClicked: eventManager.setBookmark(rootStateModel.targetObject.get());
                 }
 
                 SelectorCluster{

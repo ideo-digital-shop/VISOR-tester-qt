@@ -169,13 +169,15 @@ Item {
     }
 
     // not currently used
-    function headingTo(){
-        sendPlayAudioMsg("headingTo");
+    function headingTo(item){
+        playSoundAfter("headingTo", 0);
+        playSoundAfter(item, 1000);
     }
 
     // not currently used
-    function arrivedAt(){
-        sendPlayAudioMsg("arrivedAt");
+    function arrivedAt(item){
+        playSoundAfter("arrivedAt", 0);
+        playSoundAfter(item, 1000);
     }
 
     Timer {
@@ -196,6 +198,39 @@ Item {
                 }
             }
             root.soundsToPlay = newList;
+        }
+    }
+
+    function nudgeLeft(){
+        //sendPlayAudioMsg("nudgeLeft");
+        if( rootStateModel.vibeMode.get() )  {
+            leftMotor();
+        }
+    }
+    function nudgeRight(){
+        //sendPlayAudioMsg("nudgeRight");
+        if( rootStateModel.vibeMode.get() )  {
+            rightMotor();
+        }
+    }
+     function turnLeft(){
+         sendPlayAudioMsg("turnLeft");
+         if( rootStateModel.vibeMode.get() )  {
+             leftMotor();
+         }
+     }
+    function turnRight(){
+        sendPlayAudioMsg("turnRight");
+        if( rootStateModel.vibeMode.get() )  {
+            rightMotor();
+        }
+    }
+
+    function goForward(){
+        sendPlayAudioMsg("goForward");
+        if( rootStateModel.vibeMode.get() ) {
+            rightMotor();
+            leftMotor();
         }
     }
 
@@ -233,6 +268,12 @@ Item {
         playSoundAfter("FrontDesk", 7000);
         playSoundAfter("03", 8000);
         playSoundAfter("Kitchen", 9000);
+    }
+
+    function setBookmark(item)
+    {
+        playSoundAfter("setBookmark", 0);
+        playSoundAfter(item, 1000);
     }
 
     function sendPlayAudioMsg(msg){
