@@ -129,33 +129,36 @@ Rectangle{
                 }
             }
 
-            SelectorCluster{
-                id: flashScanModeSelector
-                width: 320
-                height: 94
-                labelText: "Flashlight Scan Mode"
-                onSelectedSignal: {
-                    rootStateModel.flashlightScanMode.set( selectionParameter );
-                }
-                SelectorButton{
-                    id: timer
-                    anchors {left: parent.left; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "Timer"
-                    selectionParameter: "timer"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.flashlightScanMode.get() === "timer")
-                }
-                SelectorButton{
-                    id: newDude
-                    anchors {left: timer.right; top: parent.mainLabel.bottom; leftMargin:8; topMargin:8}
-                    label: "New"
-                    selectionParameter: "new"
-                    width: 120
-                    height: 30
-                    active: (rootStateModel.flashlightScanMode.get() === "new")
-                }
-            }           
+            Button{
+                id: audioVolInc3dB
+                width: 100
+                height: 100
+                label: "+3dB"
+                fillColor: "#0A2036"
+                textColor: "#DFDFDF"
+                animateClick: true
+                onClicked: eventManager.audioVolInc3DB();
+            }
+            Button{
+                id: audioVolDec3dB
+                width: 100
+                height: 100
+                label: "-3dB"
+                fillColor: "#0A2036"
+                textColor: "#DFDFDF"
+                animateClick: true
+                onClicked: eventManager.audioVolDec3DB();
+            }
+            Button{
+                id: audioVolReset0dB
+                width: 100
+                height: 100
+                label: "0dB"
+                fillColor: "#0A2036"
+                textColor: "#DFDFDF"
+                animateClick: true
+                onClicked: eventManager.audioVolReset0DB();
+            }
         }
 
         Column{

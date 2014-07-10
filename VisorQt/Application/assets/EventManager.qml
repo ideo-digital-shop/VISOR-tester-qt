@@ -234,6 +234,18 @@ Item {
         }
     }
 
+    function audioVolInc3DB(){
+        sendAudioVolCtrlCmdMsg("INC_3DB");
+    }
+
+    function audioVolDec3DB(){
+        sendAudioVolCtrlCmdMsg("DEC_3DB");
+    }
+
+    function audioVolReset0DB(){
+        sendAudioVolCtrlCmdMsg("RESET_0DB");
+    }
+
     function playSoundAfter(sound, offset)
     {
         var time = new Date().getTime() + offset;
@@ -281,6 +293,14 @@ Item {
         audioCtrlMsg.push("PLAY_AUDIO");
         audioCtrlMsg.push(msg);
         noamLemma.speak("AudioPlay", JSON.stringify(audioCtrlMsg));
+        console.debug(JSON.stringify(audioCtrlMsg));
+    }
+
+    function sendAudioVolCtrlCmdMsg(msg){
+        var audioCtrlMsg = new Array;
+        audioCtrlMsg.push("AUDIO_VOL_CTRL_CMD");
+        audioCtrlMsg.push(msg);
+        noamLemma.speak("AudioVolume", JSON.stringify(audioCtrlMsg));
         console.debug(JSON.stringify(audioCtrlMsg));
     }
 

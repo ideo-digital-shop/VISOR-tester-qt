@@ -81,7 +81,7 @@ Rectangle {
         }
     }
     NoamLemmaHears{
-        topic: "IMU"
+        topic: "IMU_HMI"
         onNewEvent:{
             if( rootStateModel.headingSource.get() == "head" ){
                 var parsed = JSON.parse(value);
