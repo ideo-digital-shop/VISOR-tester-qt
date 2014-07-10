@@ -170,13 +170,13 @@ Item {
 
     // not currently used
     function headingTo(item){
-        playSoundAfter("headingTo", 0);
+        playSoundAfter("HeadingTo", 0);
         playSoundAfter(item, 1000);
     }
 
     // not currently used
     function arrivedAt(item){
-        playSoundAfter("arrivedAt", 0);
+        playSoundAfter("ArrivedAt", 0);
         playSoundAfter(item, 1000);
     }
 
@@ -202,32 +202,32 @@ Item {
     }
 
     function nudgeLeft(){
-        //sendPlayAudioMsg("nudgeLeft");
+        //sendPlayAudioMsg("SlightLeft");
         if( rootStateModel.vibeMode.get() )  {
             leftMotor();
         }
     }
     function nudgeRight(){
-        //sendPlayAudioMsg("nudgeRight");
+        //sendPlayAudioMsg("SlightRight");
         if( rootStateModel.vibeMode.get() )  {
             rightMotor();
         }
     }
      function turnLeft(){
-         sendPlayAudioMsg("turnLeft");
+         sendPlayAudioMsg("TurnLeft");
          if( rootStateModel.vibeMode.get() )  {
              leftMotor();
          }
      }
     function turnRight(){
-        sendPlayAudioMsg("turnRight");
+        sendPlayAudioMsg("TurnRight");
         if( rootStateModel.vibeMode.get() )  {
             rightMotor();
         }
     }
 
     function goForward(){
-        sendPlayAudioMsg("goForward");
+        sendPlayAudioMsg("Forward");
         if( rootStateModel.vibeMode.get() ) {
             rightMotor();
             leftMotor();
@@ -257,34 +257,34 @@ Item {
     }
 
     function woz1(){
-        playSoundAfter("09", 0);
+        playSoundAfter("At9", 0);
         playSoundAfter("Table", 1000);
-        playSoundAfter("10", 2000);
+        playSoundAfter("At10", 2000);
         playSoundAfter("People", 3000);
-        playSoundAfter("12", 4000);
+        playSoundAfter("At12", 4000);
         playSoundAfter("Table", 5000);
-        playSoundAfter("01", 6000);
+        playSoundAfter("At1", 6000);
         playSoundAfter("FrontDesk", 7000);
-        playSoundAfter("03", 8000);
+        playSoundAfter("At3", 8000);
         playSoundAfter("Kitchen", 9000);
     }
 
     function woz2(){
-        playSoundAfter("09", 0);
+        playSoundAfter("At9", 0);
         playSoundAfter("Table", 1000);
-        playSoundAfter("10", 2000);
+        playSoundAfter("At10", 2000);
         playSoundAfter("People", 3000);
-        playSoundAfter("12", 4000);
+        playSoundAfter("At12", 4000);
         playSoundAfter("Table", 5000);
-        playSoundAfter("01", 6000);
+        playSoundAfter("At1", 6000);
         playSoundAfter("FrontDesk", 7000);
-        playSoundAfter("03", 8000);
+        playSoundAfter("At3", 8000);
         playSoundAfter("Kitchen", 9000);
     }
 
     function setBookmark(item)
     {
-        playSoundAfter("setBookmark", 0);
+        playSoundAfter("captureBookmark", 0);
         playSoundAfter(item, 1000);
     }
 

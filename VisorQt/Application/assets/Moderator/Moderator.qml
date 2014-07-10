@@ -281,7 +281,7 @@ Rectangle{
                     fillColor: "#0A2036"
                     textColor: "#DFDFDF"
                     animateClick: true
-                    onClicked: eventManager.sendPlayAudioMsg("goForward");
+                    onClicked: eventManager.sendPlayAudioMsg("Forward");
                 }
             }
             Rectangle {
